@@ -14,7 +14,7 @@ app.use(cors());
     try {
         await mongoose.connect(config.mongo.url, {w:"majority", retryWrites:true, authMechanism:"DEFAULT"});
 
-        console.log("Connection to MongoDB successfully made");
+        console.log("Connection to MongoDB successfully made!");
 
 
         app.get("/health", (req:Request, res:Response) => {
