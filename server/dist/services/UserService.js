@@ -12,30 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const cors_1 = __importDefault(require("cors"));
-const config_1 = require("./config");
-const mongoose_1 = __importDefault(require("mongoose"));
-const routes_1 = require("./routes");
-const PORT = config_1.config.server.port;
-const app = (0, express_1.default)();
-app.use(express_1.default.json());
-app.use((0, cors_1.default)());
-(function startUp() {
+exports.register = register;
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const config_1 = require("../config");
+const UserDao_1 = __importDefault(require("../daos/UserDao"));
+function register(user) {
     return __awaiter(this, void 0, void 0, function* () {
+        const ROUNDS = config_1.config.server.rounds;
         try {
-            yield mongoose_1.default.connect(config_1.config.mongo.url, { w: "majority", retryWrites: true, authMechanism: "DEFAULT" });
-            console.log("Connection to MongoDB successfully made");
-            (0, routes_1.registerRoutes)(app);
-            // app.get("/health", (req:Request, res:Response) => {
-            //     res.status(200).json({message: "Server is running properly"});
-            // })
-            app.listen(PORT, () => {
-                console.log(`Server listening on port ${PORT}`);
-            });
+            const hashedPassword = yield bcrypt_1.default.hash(user.password, ROUNDS);
+            const saved = new UserDao_1.default(Object.assign(Object.assign({}, user), { password: hashedPassword }));
+            return yield saved.save();
         }
         catch (error) {
-            console.error('Error connecting to the database: ', error);
+            throw new Error("Unable to create user at this time");
         }
     });
-})();
+}
