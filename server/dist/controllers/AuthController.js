@@ -35,3 +35,4 @@ function handleRegister(req, res) {
     });
 }
 exports.default = { handleRegister };
+//# sourceMappingURL=AuthController.js.map

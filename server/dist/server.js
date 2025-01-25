@@ -39,3 +39,4 @@ app.use((0, cors_1.default)());
         }
     });
 })();
+//# sourceMappingURL=server.js.map

@@ -11,3 +11,4 @@ function registerRoutes(app) {
     });
     app.use('/auth', AuthRoutes_1.default);
 }
+//# sourceMappingURL=index.js.map

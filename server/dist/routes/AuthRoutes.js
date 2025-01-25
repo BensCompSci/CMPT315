@@ -9,3 +9,4 @@ const AuthController_1 = __importDefault(require("../controllers/AuthController"
 const router = express_1.default.Router();
 router.post("/register", AuthController_1.default.handleRegister);
 module.exports = router;
+//# sourceMappingURL=AuthRoutes.js.map

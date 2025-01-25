@@ -29,3 +29,4 @@ function register(user) {
         }
     });
 }
+//# sourceMappingURL=UserService.js.map

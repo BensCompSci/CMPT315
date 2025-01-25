@@ -45,3 +45,4 @@ const UserSchema = new mongoose_1.Schema({
     timestamps: true, versionKey: false
 });
 exports.default = mongoose_1.default.model('User', UserSchema);
+//# sourceMappingURL=UserDao.js.map
