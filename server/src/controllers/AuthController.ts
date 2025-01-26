@@ -1,8 +1,10 @@
-import { Request, Response } from "express";
+import {Request, Response} from "express";
 import {register} from '../services/UserService';
 import {IUser} from '../models/User';
 
-async function handleRegister(req:Request, res:Response){
+// public async handleRegister(req: Request, res: Response, next: NextFunction): Promise<void> {
+
+async function handleRegister(req:Request, res:Response) {
     const user:IUser = req.body;
 
     try {
@@ -18,12 +20,15 @@ async function handleRegister(req:Request, res:Response){
                 firstName: registeredUser.firstName,
                 lastName: registeredUser.lastName,
                 email: registeredUser.email
-
             }
         });
+    
     } catch (error:any) {
-        //default code for sevrer error
-        res.status(500).json({message: "Unable to register user at this time", error:error.message});
+        if(error.message.includes("E11000 duplicate key error collection:")){
+            res.status(409).json({message: "User with email already exists", error:error.message});
+        } else {
+            res.status(500).json({message: "Unable to register user at this time", error:error.message});
+        }
     }
 }
-export default {handleRegister};
+export default { handleRegister };
