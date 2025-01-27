@@ -9,10 +9,24 @@ export function ValidateSchema(schema: ObjectSchema){
             await schema.validateAsync(req.body);
             next();
         } catch (error) {
-            return res.status(422).json({message: "Object validation failed, please include a valid object"});
+            res.status(422).json({message: "Object validation failed, please include a valid object"});
         }
     }
 }
+
+// DOES THIS MAKE ANY SENSE????
+// import { RequestHandler } from 'express';
+
+// export function ValidateSchema(schema: ObjectSchema): RequestHandler {
+//     return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+//         try {
+//             await schema.validateAsync(req.body);
+//             return next();
+//         } catch (error) {
+//             res.status(422).json({ message: "Object validation failed, please include a valid object" });
+//         }
+//     }
+// }
 
 export const Schemas = {
     user:{
