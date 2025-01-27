@@ -8,6 +8,5 @@ import {Schemas, ValidateSchema} from '../middlewares/Validation';
 
 const router = express.Router();
 
-router.post("/register", AuthController.handleRegister);
-// ValidateSchema(Schemas.user.create),
+router.post("/register", ValidateSchema(Schemas.user.create), AuthController.handleRegister);
 export = router;

@@ -9,7 +9,7 @@ export function ValidateSchema(schema: ObjectSchema){
             await schema.validateAsync(req.body);
             next();
         } catch (error) {
-            return res.status(422).json({message: "Object validation failed, please include a valid object"});
+            res.status(422).json({message: "Object validation failed, please include a valid object"});
         }
     }
 }
