@@ -1,5 +1,7 @@
 import { LoginForm } from "../features/authentication/LoginForm/LoginForm"
 import { User } from "../models/User"
+import './styles/login.css'
+
 
 interface HomePageProps {
     displayLogin: boolean,

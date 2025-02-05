@@ -65,8 +65,8 @@ export const LoginForm:React.FC<LoginFormProps> = ({updateLoggedInUser}) => {
 
     return (
 
-        <form className="space-y-4 md:space-y-6 w-full max-w-sm bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 p-6">
-            <h2 className="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
+        <div className="login-container" >
+            <h2 >
                 Please Login
             </h2>
             {error && (
@@ -74,46 +74,47 @@ export const LoginForm:React.FC<LoginFormProps> = ({updateLoggedInUser}) => {
                     Username or password incorrect
                 </p>
             )}
-            <div className="space-y-2">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-900 dark:text-white">
+            <div >
+                {/* <label htmlFor="email" >
                     Email
-                </label>
+                </label> */}
                 <input
                     id="email"
                     type="email"
                     placeholder="email"
                     required
                     ref={emailRef}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    
                 />
             </div>
-            <div className="space-y-2">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-900 dark:text-white">
+            <div >
+                {/* <label htmlFor="password" className="block text-sm font-medium text-gray-900 dark:text-white">
                     Password
-                </label>
+                </label> */}
                 <input
                     id="password"
                     type="password"
                     placeholder="password"
                     required
                     ref={passwordRef}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    
                 />
             </div>
             <button
                 type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+               
                 onClick={handleLoginUser}
             >
                 Login
             </button>
-            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+            <p >
                 Don’t have an account?{" "}
-                <span className="font-medium text-primary-600 hover:underline dark:text-primary-500">
+                <span>
                     Create one!
                 </span>
             </p>
-        </form>
+        </div>
 
     )
 }
+
