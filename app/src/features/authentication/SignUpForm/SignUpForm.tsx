@@ -83,7 +83,7 @@ export const SignUpForm:React.FC<SignUpFormProps> = ({signUpNewUser}) => {
 
 
     return (
-        <div className="flex flex-col items-center p-6 max-w-md mx-auto bg-white shadow-lg rounded-2xl">
+        <div className="mt-10 flex flex-col items-center p-6 max-w-md mx-auto bg-white shadow-lg rounded-2xl">
             <h2 className="text-2xl font-bold mb-4">Create an Account</h2>
 
             {error && (
