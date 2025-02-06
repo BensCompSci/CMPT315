@@ -1,13 +1,17 @@
 import { LoginForm } from "../features/authentication/LoginForm/LoginForm"
 import { User } from "../models/User"
+
 import { SignUpForm } from "../features/authentication/SignUpForm/SignUpForm"
+
 import './styles/login.css'
 import './styles/signup.css'
 
 
 interface HomePageProps {
     displayLogin: boolean,
+
     displaySignUp: boolean,
+
     updateLoggedInUser(user: User): void
     signUpNewUser(user: User): void
 }

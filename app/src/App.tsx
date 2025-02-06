@@ -9,6 +9,7 @@ function App() {
   const [displayLogin, setDisplayLogin] = useState<boolean>(true);
   //user undefined by default
   const [loggedInUser, setLoggedInUser] = useState<User>();
+  
 
   const[displaySignUp, setDisplaySignUp] = useState<boolean>(true);
   const [signedUpUser, setSignedUpUser] = useState<User>();
@@ -43,6 +44,7 @@ function App() {
       {/* <div>
         <HomePage displaySignUp={displaySignUp} updateSignUpUser={updateSignUpUser} displaySignUp={true}/>
       </div> */}
+
 
     </>
   )

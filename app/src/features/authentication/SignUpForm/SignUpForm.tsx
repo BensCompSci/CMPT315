@@ -81,49 +81,59 @@ export const SignUpForm:React.FC<SignUpFormProps> = ({signUpNewUser}) => {
     //     console.log("Form submitted:", formData);
     // };
 
+
     return (
         <div className="mt-10 flex flex-col items-center p-6 max-w-md mx-auto bg-white shadow-lg rounded-2xl">
             <h2 className="text-2xl font-bold mb-4">Create an Account</h2>
+
             {error && (
                 <p className="text-sm text-red-500 font-medium">
                     Error
                 </p>
             )}
             <form className="flex flex-col w-full gap-3">
+
                 <input 
                     type="text" 
                     name="firstName" 
                     placeholder="First Name" 
+
                     // value={formData.firstName} 
                     // onChange={handleChange} 
                     required 
                     ref={firstNameRef}
+
                     className="border p-2 rounded"
                 />
                 <input 
                     type="text" 
                     name="lastName" 
                     placeholder="Last Name" 
+
                     // value={formData.lastName} 
                     // onChange={handleChange} 
                     required 
                     ref={lastNameRef}
+
                     className="border p-2 rounded"
                 />
                 <input 
                     type="email" 
                     name="email" 
                     placeholder="Email" 
+
                     // value={formData.email} 
                     // onChange={handleChange} 
                     required 
                     ref={emailRef}
+
                     className="border p-2 rounded"
                 />
                 <input 
                     type="password" 
                     name="password" 
                     placeholder="Password" 
+
                     // value={formData.password} 
                     // onChange={handleChange} 
                     required 
@@ -131,6 +141,7 @@ export const SignUpForm:React.FC<SignUpFormProps> = ({signUpNewUser}) => {
                     className="border p-2 rounded"
                 />
                 {/* <label className="text-sm font-semibold">Date of Birth:</label>
+
                 <input 
                     type="date" 
                     name="dob" 
@@ -150,14 +161,18 @@ export const SignUpForm:React.FC<SignUpFormProps> = ({signUpNewUser}) => {
                     <option value="student">Student</option>
                     <option value="teacher">Teacher</option>
                     <option value="personal_development">Personal Development</option>
+
                 </select> */}
                 <button type="submit" 
                         onClick={handleRegisterUser}
                         className="bg-blue-500 text-white p-2 rounded mt-3 hover:bg-blue-600">
+
                     Sign Up
                 </button>
             </form>
             <p className="mt-4 text-sm">Already have an account? <a href="login.html" className="text-blue-500">Login</a></p>
         </div>
     );
+
 }
+
