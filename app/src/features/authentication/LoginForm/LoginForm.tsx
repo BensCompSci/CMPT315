@@ -14,7 +14,7 @@ export const LoginForm:React.FC<LoginFormProps> = ({updateLoggedInUser}) => {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
-    //USING FETCH (MORE)//Buggy still
+    //USING FETCH 
     const handleLoginUser = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (emailRef && emailRef.current && passwordRef && passwordRef.current) {
