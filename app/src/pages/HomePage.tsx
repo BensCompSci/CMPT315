@@ -19,7 +19,7 @@ interface HomePageProps {
 export default function HomePage(props: HomePageProps): JSX.Element {
     return (
         <div>
-            Home page
+            {/* Home page */}
             {props.displayLogin ? <LoginForm updateLoggedInUser={props.updateLoggedInUser} /> : <></>}
             {props.displaySignUp ? <SignUpForm signUpNewUser={props.signUpNewUser} /> : <></>} 
         </div>

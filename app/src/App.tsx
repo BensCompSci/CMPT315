@@ -35,7 +35,8 @@ function App() {
   return (
     <>
       <div>
-        <h1 className="text-amber-400"> HELLO! DO YOU WORK???</h1>
+
+        {/* <h1 className="text-amber-400"> HELLO! DO YOU WORK???</h1> */}
 
         <HomePage displayLogin={displayLogin} updateLoggedInUser={updateLoggedInUser} signUpNewUser={signUpNewUser} displaySignUp={displaySignUp}
         
