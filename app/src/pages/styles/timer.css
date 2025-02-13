@@ -82,7 +82,7 @@ nav a:hover {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 600px; /* Increase max-width to fit the container */
+    max-width: 600px; 
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -92,12 +92,12 @@ nav a:hover {
 
 .new-timer-popup input,
 .new-timer-popup textarea {
-    width: 100%; /* Make input and textarea boxes take full width */
-    margin-bottom: 10px; /* Add some space between the boxes */
-    padding: 10px; /* Add padding for better appearance */
-    border: 1px solid #ddd; /* Add border */
-    border-radius: 5px; /* Add border radius */
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    width: 100%; 
+    margin-bottom: 10px; 
+    padding: 10px; 
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    box-sizing: border-box; 
 }
 
 .error-message {
@@ -131,14 +131,14 @@ button {
     margin-top: 10px;
     padding: 10px 20px;
     border: none;
-    background-color: #ff7f50; /* Change background color to orange */
+    background-color: #ff7f50; 
     color: white;
     border-radius: 5px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #ff4500; /* Change hover background color to a darker orange */
+    background-color: #ff4500; 
 }
 
 .timer-buttons, .timer-settings, .task-container {
@@ -149,22 +149,22 @@ button:hover {
 .task-container {
     margin: 10px 0;
     width: 100%;
-    padding: 10px; /* Add padding */
-    border: 1px solid #ddd; /* Add border */
-    border-radius: 5px; /* Add border radius */
-    background-color: #f9f9f9; /* Add background color */
+    padding: 10px; 
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    background-color: #f9f9f9; 
 }
 
 /* Timer Bar Styling */
 .timer-bar {
     background-color: #e0e0e0;
-    padding: 60px; /* Increase padding to make the timer-bar bigger */
+    padding: 60px; 
     border-radius: 5px;
     text-align: center;
     width: 100%;
     box-sizing: border-box;
-    font-size: 4em; /* Increase the font size */
-    min-height: 100px; /* Set a minimum height */
+    font-size: 4em; 
+    min-height: 100px; 
 }
 
 .timer-bar.active {
