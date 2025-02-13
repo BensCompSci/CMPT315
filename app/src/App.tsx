@@ -3,6 +3,8 @@ import HomePage from "./pages/HomePage";
 import "./App.css";
 import { User } from "./models/User";
 import Calendar from "./pages/Calendar";
+import StatsComponent from "./pages/Stats";
+
 // import { SignUpForm } from './features/authentication/SignUpForm/SignUpForm';
 
 function App() {
@@ -43,7 +45,7 @@ function App() {
         /> */}
         {/* <SignUpForm/> */}
 
-        <Calendar />
+        <StatsComponent />
 
 
       </div>
