@@ -60,7 +60,7 @@ nav a:hover {
     width: 100%;
 }
 
-
+/* Timer Container */
 .timer-container {
     background-color: white;
     padding: 20px;
@@ -76,13 +76,13 @@ nav a:hover {
     align-items: center;
 }
 
-.timer-popup, .popup {
+.timer-popup, .new-timer-popup {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 600px; /* Increase max-width to fit the container */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -90,11 +90,19 @@ nav a:hover {
     align-items: center;
 }
 
+.new-timer-popup input,
+.new-timer-popup textarea {
+    width: 100%; /* Make input and textarea boxes take full width */
+    margin-bottom: 10px; /* Add some space between the boxes */
+    padding: 10px; /* Add padding for better appearance */
+    border: 1px solid #ddd; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
 .error-message {
     color: red;
 }
-
-
 
 .expanded {
     flex: 1;
@@ -133,11 +141,21 @@ button:hover {
     background-color: #ff4500; /* Change hover background color to a darker orange */
 }
 
-.timer-buttons, .timer-settings, .task-container, .checkbox-container {
+.timer-buttons, .timer-settings, .task-container {
     margin: 10px 0;
     width: 100%;
 }
 
+.task-container {
+    margin: 10px 0;
+    width: 100%;
+    padding: 10px; /* Add padding */
+    border: 1px solid #ddd; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    background-color: #f9f9f9; /* Add background color */
+}
+
+/* Timer Bar Styling */
 .timer-bar {
     background-color: #e0e0e0;
     padding: 60px; /* Increase padding to make the timer-bar bigger */
@@ -146,5 +164,14 @@ button:hover {
     width: 100%;
     box-sizing: border-box;
     font-size: 4em; /* Increase the font size */
-    min-height: 500px; /* Set a minimum height */
+    min-height: 100px; /* Set a minimum height */
 }
+
+.timer-bar.active {
+    background-color: #4caf50; /* Green background when active */
+}
+
+.timer-bar.paused {
+    background-color: #f44336; /* Red background when paused */
+}
+

@@ -20,6 +20,13 @@ const Timer: React.FC = () => {
     const [newTimer, setNewTimer] = useState({ title: "", details: "", duration: "" });
     const [error, setError] = useState("");
 
+    const [tasks, setTasks] = useState([
+        { id: 1, name: "Study for CMPT 315" },
+        { id: 2, name: "Create Database" },
+        { id: 3, name: "Build Lego Set" },
+    ]);
+    const [selectedTask, setSelectedTask] = useState(tasks[0].id);
+
     useEffect(() => {
         if (isActive && !isPaused) {
             intervalRef.current = setInterval(() => {
@@ -85,6 +92,10 @@ const Timer: React.FC = () => {
         return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
     };
 
+    const handleCompleteTask = () => {
+        setTasks(tasks.filter(task => task.id !== selectedTask));
+    };
+
     return (
         <div className="container">
             <header>
@@ -102,7 +113,7 @@ const Timer: React.FC = () => {
                     <button onClick={() => setSelectedItem(null)}>Back</button>
                 </div>
             ) : showTimerForm ? (
-                <div className="popup">
+                <div className="new-timer-popup">
                     <h2>New Timer</h2>
                     {error && <p className="error-message">{error}</p>}
                     <input
@@ -129,7 +140,7 @@ const Timer: React.FC = () => {
             ) : (
                 <>
                     <div className="timer-container">
-                        <div className="timer-bar">
+                        <div className={`timer-bar ${isActive ? 'active' : ''} ${isPaused ? 'paused' : ''}`}>
                             <span>{formatTime(time)}</span>
                         </div>
                     </div>
@@ -148,11 +159,12 @@ const Timer: React.FC = () => {
                     </div>
                     <div className="task-container">
                         <label>Task chosen:</label>
-                        <input type="text" placeholder="Selected task" disabled />
-                    </div>
-                    <div className="checkbox-container">
-                        <label>Mark as completed task:</label>
-                        <input type="checkbox" />
+                        <select value={selectedTask} onChange={(e) => setSelectedTask(Number(e.target.value))}>
+                            {tasks.map((task) => (
+                                <option key={task.id} value={task.id}>{task.name}</option>
+                            ))}
+                        </select>
+                        <button onClick={handleCompleteTask} style={{ marginLeft: '10px' }}>Complete Task</button>
                     </div>
                     <div className="content">
                         <section className="timers expanded" style={{ height: "450px" }}>
