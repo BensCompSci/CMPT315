@@ -1,4 +1,5 @@
-body, html {
+/* General Page Styles */
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -9,7 +10,58 @@ body, html {
     background-color: #f0f0f0;
 }
 
+/* Main Container */
 .container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    height: auto; /* Change height to auto */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items to the top */
+    align-items: center;
+    margin-top: 20px; /* Add margin to the top */
+}
+
+/* Title Styling */
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Navigation Bar */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+nav a {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6347;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #e5533d;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+.timer-container {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -24,17 +76,75 @@ body, html {
     align-items: center;
 }
 
-.timer-container, .timer-buttons, .timer-settings, .task-container, .checkbox-container {
+.timer-popup, .popup {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-message {
+    color: red;
+}
+
+
+
+.expanded {
+    flex: 1;
+    margin: 10px;
+}
+
+.scrollable-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.scrollable-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.scrollable-list li:hover {
+    background-color: #f0f0f0;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #ff7f50; /* Change background color to orange */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff4500; /* Change hover background color to a darker orange */
+}
+
+.timer-buttons, .timer-settings, .task-container, .checkbox-container {
     margin: 10px 0;
     width: 100%;
 }
 
 .timer-bar {
     background-color: #e0e0e0;
-    padding: 40px; /* Increase padding to make the timer-bar bigger */
+    padding: 60px; /* Increase padding to make the timer-bar bigger */
     border-radius: 5px;
     text-align: center;
     width: 100%;
     box-sizing: border-box;
-    font-size: 3em; /* Increase the font size */
+    font-size: 4em; /* Increase the font size */
+    min-height: 500px; /* Set a minimum height */
 }

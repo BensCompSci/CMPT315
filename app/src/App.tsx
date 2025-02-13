@@ -4,6 +4,7 @@ import "./App.css";
 import { User } from "./models/User";
 import Calendar from "./pages/Calendar";
 import StatsComponent from "./pages/Stats";
+import Timer from "./pages/Timer";
 
 // import { SignUpForm } from './features/authentication/SignUpForm/SignUpForm';
 
@@ -45,7 +46,7 @@ function App() {
         /> */}
         {/* <SignUpForm/> */}
 
-        <StatsComponent />
+        <Timer />
 
 
       </div>
