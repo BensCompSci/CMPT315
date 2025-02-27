@@ -24,5 +24,6 @@ dist-ssr
 *.sln
 *.sw?
 
-app/node_modules/*
-server/node_modules/*
+# manually added
+./app/node_modules/*
+./server/node_modules/*
