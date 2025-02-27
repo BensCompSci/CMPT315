@@ -46,6 +46,7 @@ function App() {
         /> */}
         {/* <SignUpForm/> */}
         <Calendar />
+        {/* <br /> */}
         {/* <StatsComponent /> */}
         {/* <Timer /> */}
       </div>
