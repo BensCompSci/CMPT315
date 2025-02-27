@@ -5,6 +5,7 @@ import { User } from "./models/User";
 import Calendar from "./pages/Calendar";
 import StatsComponent from "./pages/Stats";
 import Timer from "./pages/Timer";
+import Dashboard from "./pages/Dashboard.tsx";
 
 import { SignUpForm } from './features/authentication/SignUpForm/SignUpForm';
 
@@ -45,7 +46,7 @@ function App() {
           displaySignUp={displaySignUp}
         /> */}
         {/* <SignUpForm/> */}
-        <Calendar />
+        <Dashboard />
         {/* <StatsComponent /> */}
         {/* <Timer /> */}
       </div>

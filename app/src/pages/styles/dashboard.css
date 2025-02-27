@@ -1,0 +1,93 @@
+/* General styles for the dashboard page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Container for the dashboard components */
+.dashboard-container {
+    width: 100%; /* Take up the entire width of the screen */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
+    background-color: #ff6347; /* Match the orange color */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Content layout styles */
+.dashboard-content {
+    display: flex;
+}
+
+/* Left styles */
+.dashboard-left{
+    flex: 0 0 50%;
+    margin-right: 20px;
+}
+
+/* Right styles */
+.dashboard-right {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px ;
+}
+
+/* Calendar and Stats styles */
+.dashboard-calendar {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.dashboard-stats {
+    flex: 1;
+}
+
+/* Main content styles */
+.dashboard-main {
+    flex: 3;
+}
+
+/* Styles for individual components */
+.dashboard-component {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 10px;
+    }
+
+    .dashboard-content {
+        flex-direction: column;
+    }
+
+    .dashboard-sidebar {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .dashboard-main {
+        flex: 1;
+    }
+
+    .dashboard-component {
+        padding: 10px;
+    }
+}
