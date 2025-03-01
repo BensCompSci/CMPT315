@@ -82,6 +82,11 @@ const Calendar: React.FC = () => {
             onClick={() => onDateClick(cloneDay)}
           >
             <span className="number">{formattedDate}</span>
+            <div className="task-list">
+              {/* Example tasks, replace with your dynamic tasks */}
+              <div>Task 1</div>
+              <div>Task 2</div>
+            </div>
             <span className="bg">{formattedDate}</span>
           </div>
         );
