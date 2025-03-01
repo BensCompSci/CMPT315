@@ -72,10 +72,6 @@ const StatsComponent: React.FC = () => {
       ) : (
         <>
           <h1>Statistics & Tasks</h1>
-          <nav>
-            <a href="index.html">Timer</a>
-            <a href="login.html">Login</a>
-          </nav>
           <div className="content">
             <section className="previous-sessions expanded" style={{ height: "450px" }}>
               <h2>Previous Sessions</h2>
