@@ -51,7 +51,7 @@
   padding: 20px; /* Increased padding */
   border: 1px solid #ddd;
   cursor: pointer;
-  height: 150px; /* Increased height */
+  height: 100px; /* Increased height */
 }
 
 .cell.disabled {
@@ -90,4 +90,15 @@
   font-size: 14px;
   text-align: left;
   width: 100%;
+}
+
+.calendar-container {
+  text-align: center;
+  width: 100%;
+  max-width: 800px; /* Same max-width as the calendar */
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  margin: 10px auto;
 }

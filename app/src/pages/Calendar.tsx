@@ -84,8 +84,6 @@ const Calendar: React.FC = () => {
             <span className="number">{formattedDate}</span>
             <div className="task-list">
               {/* Example tasks, replace with your dynamic tasks */}
-              <div>Task 1</div>
-              <div>Task 2</div>
             </div>
             <span className="bg">{formattedDate}</span>
           </div>
@@ -115,10 +113,12 @@ const Calendar: React.FC = () => {
   };
 
   return (
-    <div className="calendar">
-      {renderHeader()}
-      {renderDays()}
-      {renderCells()}
+    <div className="calendar-container">
+      <div className="calendar">
+        {renderHeader()}
+        {renderDays()}
+        {renderCells()}
+      </div>
     </div>
   );
 };

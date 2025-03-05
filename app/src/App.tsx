@@ -46,9 +46,11 @@ function App() {
           displaySignUp={displaySignUp}
         /> */}
         {/* <SignUpForm/> */}
-        <Dashboard />
+        {/* <Dashboard /> */}
         {/* <br /> */}
-        {/* <StatsComponent /> */}
+        <Calendar />
+        <StatsComponent />
+      
         {/* <Timer /> */}
       </div>
       {/* <div>
