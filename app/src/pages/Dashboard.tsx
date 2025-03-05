@@ -4,7 +4,7 @@ import Calendar from './Calendar';
 import StatsComponent from './Stats';
 import Timer from './Timer';
 import { User } from '../models/User';
-import './styles/Dashboard.css';
+import './styles/dashboard.css';
 
 const Dashboard: React.FC = () => {
     const updateLoggedInUser = (user: User) => {
