@@ -15,6 +15,22 @@
   border-bottom: 1px solid #ddd;
 }
 
+.view-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.view-toggle button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.header .view-toggle {
+  margin-left: auto;
+}
+
 .row {
   display: flex;
   justify-content: space-between;
@@ -101,4 +117,12 @@
   border-radius: 15px;
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
   margin: 10px auto;
+}
+
+.daily-view .cell {
+  height: 100px; /* Same height as monthly-view cells */
+}
+
+.weekly-view .cell {
+  height: 100px; /* Same height as monthly-view cells */
 }
