@@ -22,9 +22,21 @@
 }
 
 .view-toggle button {
-  margin: 0 5px;
-  padding: 5px 10px;
+  background: #ff6347;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background 0.3s ease;
+  flex: 1; /* Ensure equal size */
+  margin: 0 5px; /* Add margin between buttons */
+}
+
+.view-toggle button:hover {
+  background: #e5533d;
 }
 
 .header .view-toggle {
