@@ -57,6 +57,14 @@ const Calendar: React.FC = () => {
   };
 
   const renderDays = () => {
+    if (view === "daily") {
+      return (
+        <div className="days row">
+          <div className="col col-center">{format(selectedDate, "EEEE")}</div>
+        </div>
+      );
+    }
+
     const days = [];
     const dateFormat = "EEEE";
     const startDate = startOfWeek(currentMonth);
@@ -83,39 +91,20 @@ const Calendar: React.FC = () => {
   };
 
   const renderDailyCells = () => {
-    const dayStart = startOfWeek(selectedDate);
-    const dayEnd = endOfWeek(selectedDate);
-    const rows = [];
-    let days = [];
-    let day = dayStart;
-    let formattedDate = "";
-
-    while (day <= dayEnd) {
-      formattedDate = format(day, "d");
-      const cloneDay = day;
-      days.push(
-        <div
-          className={`col cell ${
-            isSameDay(day, selectedDate) ? "selected" : ""
-          }`}
-          key={day.toString()}
-          onClick={() => onDateClick(cloneDay)}
-        >
-          <span className="number">{formattedDate}</span>
-          <div className="task-list">
-            {/* Example tasks, replace with your dynamic tasks */}
+    const formattedDate = format(selectedDate, "d");
+    return (
+      <div className="body daily-view">
+        <div className="row">
+          <div className="col cell">
+            <span className="number">{formattedDate}</span>
+            <div className="task-list">
+              {/* Example tasks, replace with your dynamic tasks */}
+            </div>
+            <span className="bg">{formattedDate}</span>
           </div>
-          <span className="bg">{formattedDate}</span>
         </div>
-      );
-      day = addDays(day, 1);
-    }
-    rows.push(
-      <div className="row" key={day.toString()}>
-        {days}
       </div>
     );
-    return <div className="body daily-view">{rows}</div>;
   };
 
   const renderWeeklyCells = () => {

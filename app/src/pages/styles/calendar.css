@@ -134,7 +134,8 @@
 }
 
 .daily-view .cell {
-  height: 600px; /* Same height as monthly-view cells */
+  height: 600px; /* Adjust height for daily view */
+  background-color: white; /* Ensure background is white */
 }
 
 .weekly-view .cell {
