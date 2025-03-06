@@ -103,7 +103,7 @@ export const SignUpForm:React.FC<SignUpFormProps> = ({signUpNewUser}) => {
                     required 
                     ref={firstNameRef}
 
-                    className="border p-2 rounded"
+                    className="border p-2 rounded w-full"
                 />
                 <input 
                     type="text" 
@@ -115,7 +115,7 @@ export const SignUpForm:React.FC<SignUpFormProps> = ({signUpNewUser}) => {
                     required 
                     ref={lastNameRef}
 
-                    className="border p-2 rounded"
+                    className="border p-2 rounded w-full"
                 />
                 <input 
                     type="email" 
@@ -127,7 +127,7 @@ export const SignUpForm:React.FC<SignUpFormProps> = ({signUpNewUser}) => {
                     required 
                     ref={emailRef}
 
-                    className="border p-2 rounded"
+                    className="border p-2 rounded w-full"
                 />
                 <input 
                     type="password" 
@@ -138,7 +138,7 @@ export const SignUpForm:React.FC<SignUpFormProps> = ({signUpNewUser}) => {
                     // onChange={handleChange} 
                     required 
                     ref={passwordRef}
-                    className="border p-2 rounded"
+                    className="border p-2 rounded w-full"
                 />
                 {/* <label className="text-sm font-semibold">Date of Birth:</label>
 
@@ -148,7 +148,7 @@ export const SignUpForm:React.FC<SignUpFormProps> = ({signUpNewUser}) => {
                     value={formData.dob} 
                     onChange={handleChange} 
                     required 
-                    className="border p-2 rounded"
+                    className="border p-2 rounded w-full"
                 />
                 <label className="text-sm font-semibold">Reason for Creating a Profile:</label>
                 <select 
@@ -156,7 +156,7 @@ export const SignUpForm:React.FC<SignUpFormProps> = ({signUpNewUser}) => {
                     value={formData.reason} 
                     onChange={handleChange} 
                     required 
-                    className="border p-2 rounded"
+                    className="border p-2 rounded w-full"
                 >
                     <option value="student">Student</option>
                     <option value="teacher">Teacher</option>

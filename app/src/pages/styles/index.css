@@ -116,11 +116,12 @@ button:hover {
 }
 
 input {
-    width: 80px;
-    padding: 5px;
-    border: 2px solid black;
-    text-align: center;
-    border-radius: 5px;
+    /* Prefer not styling generic elements, since it could mess with tailwind */
+    /* width: 80px; */
+    /* padding: 5px; */
+    /* border: 2px solid black; */
+    /* text-align: center; */
+    /* border-radius: 5px; */
 }
 
 /* Task Container */

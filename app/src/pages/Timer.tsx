@@ -146,11 +146,11 @@ const Timer: React.FC = () => {
                         <button onClick={handleReset}>Reset</button>
                     </div>
                     <div className="timer-settings">
-                        <label>Short Break: <input type="text" placeholder="5 min" value={shortBreak / 60}
+                        <label>Short Break: <input type="text" className="w-20 border-2 text-center rounded-lg p-1.5" placeholder="5 min" value={shortBreak / 60}
                                             onChange={(e) => setShortBreak(Number(e.target.value) * 60)} /></label>
-                        <label>Work Time: <input type="text" placeholder="25 min" value={workTime / 60}
+                        <label>Work Time: <input type="text" className="w-20 border-2 text-center rounded-lg p-1.5" placeholder="25 min" value={workTime / 60}
                                             onChange={(e) => setWorkTime(Number(e.target.value) * 60)} /></label>
-                        <label>Long Break: <input type="text" placeholder="15 min" value={longBreak / 60}
+                        <label>Long Break: <input type="text" className="w-20 border-2 text-center rounded-lg p-1.5" placeholder="15 min" value={longBreak / 60}
                                             onChange={(e) => setLongBreak(Number(e.target.value) * 60)} /></label>
                     </div>
                     <div className="task-container">
