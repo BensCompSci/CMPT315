@@ -19,7 +19,7 @@ const HomePage: React.FC<HomePageProps> = ({ updateLoggedInUser }) => {
         ) : (
           <SignUpForm
             switchToLogin={() => {
-              alert("You've been registered! Please log in.");
+            //   alert("You've been registered! Please log in.");
               setShowLogin(true);
             }}
           />

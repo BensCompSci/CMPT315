@@ -34,9 +34,7 @@ const Dashboard: React.FC = () => {
                     <div className="dashboard-stats">
                         <StatsComponent />
                     </div>
-                    <div className="dashboard-main">
-                        <HomePage displayLogin={false} displaySignUp={false} updateLoggedInUser={updateLoggedInUser} signUpNewUser={signUpNewUser} />
-                    </div>
+                    
                 </div>
             </div>
         </div>
