@@ -37,16 +37,13 @@ const Calendar: React.FC = () => {
             &gt;
           </button>
         </div>
-      </div>
-    );
-  };
-
-  const renderViewToggle = () => {
-    return (
-      <div className="view-toggle">
-        <button onClick={() => setView("daily")}>Daily</button>
-        <button onClick={() => setView("weekly")}>Weekly</button>
-        <button onClick={() => setView("monthly")}>Monthly</button>
+        <div className="view-toggle">
+          <select onChange={(e) => setView(e.target.value)} value={view}>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+        </div>
       </div>
     );
   };
@@ -220,7 +217,6 @@ const Calendar: React.FC = () => {
     <div className="calendar-container">
       <div className="calendar">
         {renderHeader()}
-        {renderViewToggle()}
         {renderDays()}
         {renderCells()}
       </div>

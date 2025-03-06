@@ -39,6 +39,22 @@
   background: #e5533d;
 }
 
+.view-toggle select {
+  background: #ff6347;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.view-toggle select:hover {
+  background: #e5533d;
+}
+
 .header .view-toggle {
   margin-left: auto;
 }
