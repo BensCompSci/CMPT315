@@ -1,62 +1,42 @@
-import { useEffect, useState } from "react";
-import HomePage from "./pages/HomePage";
-import "./App.css";
-import { User } from "./models/User";
-import Calendar from "./pages/Calendar";
-import StatsComponent from "./pages/Stats";
-import Timer from "./pages/Timer";
-import Dashboard from "./pages/Dashboard.tsx";
+// import { useState } from "react";
+// import HomePage from "./pages/HomePage";
+// import Dashboard from "./pages/Dashboard.tsx";
+// import { User } from "./models/User";
+// import "./App.css";
 
-import { SignUpForm } from './features/authentication/SignUpForm/SignUpForm';
+// function App() {
+//   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
+
+//   return (
+//     <div>
+//       {loggedInUser ? (
+//         <Dashboard />
+//       ) : (
+//         <HomePage updateLoggedInUser={setLoggedInUser} />
+//       )}
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import { useState } from "react";
+import HomePage from "./pages/HomePage";
+import Dashboard from "./pages/Dashboard";
+import { User } from "./models/User";
+import "./App.css";
 
 function App() {
-  const [displayLogin, setDisplayLogin] = useState<boolean>(true);
-  //user undefined by default
-  const [loggedInUser, setLoggedInUser] = useState<User>();
-
-  const [displaySignUp, setDisplaySignUp] = useState<boolean>(true);
-  const [signedUpUser, setSignedUpUser] = useState<User>();
-
-  const updateLoggedInUser = (user: User) => {
-    setLoggedInUser(user);
-    setDisplayLogin(false);
-  };
-  const signUpNewUser = (user: User) => {
-    setSignedUpUser(user);
-    setDisplaySignUp(false);
-  };
-
-  useEffect(() => {
-    console.log(loggedInUser);
-  }, [loggedInUser]);
-
-  useEffect(() => {
-    console.log(signedUpUser);
-  }, [signedUpUser]);
+  const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
 
   return (
-    <>
-      <div>
-        {/* <h1 className="text-amber-400"> HELLO! DO YOU WORK???</h1> */}
-
-        {/* <HomePage
-          displayLogin={displayLogin}
-          updateLoggedInUser={updateLoggedInUser}
-          signUpNewUser={signUpNewUser}
-          displaySignUp={displaySignUp}
-        /> */}
-        {/* <SignUpForm/> */}
-        <Dashboard />
-        {/* <br /> */}
-        {/* <Calendar />
-        <StatsComponent />
-       */}
-        {/* <Timer /> */}
-      </div>
-      {/* <div>
-        <HomePage displaySignUp={displaySignUp} updateSignUpUser={updateSignUpUser} displaySignUp={true}/>
-      </div> */}
-    </>
+    <div>
+      {loggedInUser ? (
+        <Dashboard onLogout={() => setLoggedInUser(null)} />
+      ) : (
+        <HomePage updateLoggedInUser={setLoggedInUser} />
+      )}
+    </div>
   );
 }
 
