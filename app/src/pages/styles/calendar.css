@@ -15,6 +15,36 @@
   border-bottom: 1px solid #ddd;
 }
 
+.view-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  margin-top: 10px; /* Add margin to separate from the header */
+}
+
+.view-toggle button,
+.view-toggle select {
+  background: #ff6347;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin: 0 5px; /* Add margin between elements */
+}
+
+.view-toggle button:hover,
+.view-toggle select:hover {
+  background: #e5533d;
+}
+
+.header .view-toggle {
+  margin-left: auto;
+}
+
 .row {
   display: flex;
   justify-content: space-between;
@@ -51,7 +81,7 @@
   padding: 20px; /* Increased padding */
   border: 1px solid #ddd;
   cursor: pointer;
-  height: 150px; /* Increased height */
+  height: 100px; /* Increased height */
 }
 
 .cell.disabled {
@@ -90,4 +120,24 @@
   font-size: 14px;
   text-align: left;
   width: 100%;
+}
+
+.calendar-container {
+  text-align: center;
+  width: 100%;
+  max-width: 800px; /* Same max-width as the calendar */
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  margin: 10px auto;
+}
+
+.daily-view .cell {
+  height: 600px; /* Adjust height for daily view */
+  background-color: white; /* Ensure background is white */
+}
+
+.weekly-view .cell {
+  height: 600px; /* Same height as monthly-view cells */
 }
