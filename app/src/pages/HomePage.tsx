@@ -1,27 +1,32 @@
-import { LoginForm } from "../features/authentication/LoginForm/LoginForm"
-import { User } from "../models/User"
 
-import { SignUpForm } from "../features/authentication/SignUpForm/SignUpForm"
-
-import './styles/login.css'
-import './styles/signup.css'
-
+import { useState } from "react";
+import { LoginForm } from "../features/authentication/LoginForm/LoginForm";
+import { SignUpForm } from "../features/authentication/SignUpForm/SignUpForm";
+import { User } from "../models/User";
 
 interface HomePageProps {
-    displayLogin: boolean,
-
-    displaySignUp: boolean,
-
-    updateLoggedInUser(user: User): void
-    signUpNewUser(user: User): void
+  updateLoggedInUser(user: User): void;
 }
 
-export default function HomePage(props: HomePageProps): JSX.Element {
-    return (
-        <div>
-            {/* Home page */}
-            {props.displayLogin ? <LoginForm updateLoggedInUser={props.updateLoggedInUser} /> : <></>}
-            {props.displaySignUp ? <SignUpForm signUpNewUser={props.signUpNewUser} /> : <></>} 
-        </div>
-    )
-}
+const HomePage: React.FC<HomePageProps> = ({ updateLoggedInUser }) => {
+  const [showLogin, setShowLogin] = useState(true);
+
+  return (
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+      <div className="bg-white shadow-lg rounded-2xl p-8 w-96 space-y-4">
+        {showLogin ? (
+          <LoginForm updateLoggedInUser={updateLoggedInUser} switchToSignUp={() => setShowLogin(false)} />
+        ) : (
+          <SignUpForm
+            switchToLogin={() => {
+              alert("You've been registered! Please log in.");
+              setShowLogin(true);
+            }}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default HomePage;

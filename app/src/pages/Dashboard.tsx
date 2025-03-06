@@ -1,4 +1,6 @@
+
 import React from 'react';
+import Sidebar from './Sidebar';
 import HomePage from './HomePage';
 import Calendar from './Calendar';
 import StatsComponent from './Stats';
@@ -17,17 +19,24 @@ const Dashboard: React.FC = () => {
 
     return (
         <div className="dashboard-container">
-            <h1 className="dashboard-header">Dashboard</h1>
-            <div className="dashboard-content">
-                <div className="dashboard-left">
-                    <Timer />
-                </div>
-                <div className="dashboard-right">
-                    <Calendar />
-                    <StatsComponent />
-                </div>
-                <div className="dashboard-main">
-                    <HomePage displayLogin={false} displaySignUp={false} updateLoggedInUser={updateLoggedInUser} signUpNewUser={signUpNewUser} />
+            <div className="dashboard-left">
+                <Sidebar />
+            </div>
+            <div className="dashboard-right">
+                <h1 className="dashboard-header">Task Manager</h1>
+                <div className="dashboard-content">
+                    <div className="dashboard-calendar">
+                        <Calendar />
+                    </div>
+                    <div className="dashboard-timer">
+                        <Timer />
+                    </div>
+                    <div className="dashboard-stats">
+                        <StatsComponent />
+                    </div>
+                    <div className="dashboard-main">
+                        <HomePage displayLogin={false} displaySignUp={false} updateLoggedInUser={updateLoggedInUser} signUpNewUser={signUpNewUser} />
+                    </div>
                 </div>
             </div>
         </div>

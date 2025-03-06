@@ -6,11 +6,14 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Container for the dashboard components */
 .dashboard-container {
-    width: 100%; /* Take up the entire width of the screen */
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh; /* Take up the full height of the viewport */
     margin: 0 auto;
     padding: 20px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 /* Dashboard Header */
@@ -23,35 +26,47 @@ body {
     background-color: #ff6347; /* Match the orange color */
     padding: 20px;
     border-radius: 8px;
+    width: 100%; /* Take up 100% of the width */
 }
 
 /* Content layout styles */
 .dashboard-content {
     display: flex;
+    flex: 1;
+    flex-direction: row; /* Ensure the content is laid out in a row */
+    flex-wrap: wrap; /* Allow content to wrap to the next line if necessary */
+    height: 100%;
 }
 
-/* Left styles */
-.dashboard-left{
-    flex: 0 0 50%;
+.dashboard-left {
+    flex: 0 0 10%; /* Adjust the width of the sidebar */
     margin-right: 20px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
-/* Right styles */
 .dashboard-right {
-    flex: 0 0 50%;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    margin-left: 20px ;
+    margin-left: 20px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    height: 100%;
 }
 
-/* Calendar and Stats styles */
 .dashboard-calendar {
     flex: 1;
     margin-bottom: 20px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    height: 50%;
+    margin-bottom: 20px; /* Add margin to the bottom to create space */
 }
 
-.dashboard-stats {
+.dashboard-timer,
+.dashboard-stats,
+.dashboard-main {
     flex: 1;
+    margin-bottom: 20px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 /* Main content styles */
@@ -59,18 +74,19 @@ body {
     flex: 3;
 }
 
-/* Styles for individual components */
 .dashboard-component {
     margin-bottom: 20px;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
     .dashboard-container {
+        flex-direction: column;
         padding: 10px;
     }
 
@@ -78,9 +94,10 @@ body {
         flex-direction: column;
     }
 
-    .dashboard-sidebar {
+    .dashboard-left {
         margin-right: 0;
         margin-bottom: 20px;
+        flex: 0 0 auto;
     }
 
     .dashboard-main {
