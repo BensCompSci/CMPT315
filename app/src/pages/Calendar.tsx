@@ -150,16 +150,14 @@ const Calendar: React.FC = () => {
 
   const renderMonthlyCells = () => {
     const monthStart = startOfMonth(currentMonth);
-    const monthEnd = endOfMonth(monthStart);
     const startDate = startOfWeek(monthStart);
-    const endDate = endOfWeek(monthEnd);
-
     const rows = [];
     let days = [];
     let day = startDate;
     let formattedDate = "";
 
-    while (day <= endDate) {
+    for (let week = 0; week < 6; week++) {
+      // Ensure 6 rows
       for (let i = 0; i < 7; i++) {
         formattedDate = format(day, "d");
         const cloneDay = day;
