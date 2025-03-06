@@ -43,92 +43,99 @@
 
 // export default Dashboard;
 
-import React from 'react';
-import Sidebar from './Sidebar';
-import Calendar from './Calendar';
-import StatsComponent from './Stats';
-import Timer from './Timer';
-
-const Dashboard: React.FC = () => {
-    return (
-        <div className="flex h-screen bg-gray-100">
-            {/* Sidebar */}
-            <aside className="w-64 bg-white shadow-lg hidden lg:block">
-                <Sidebar />
-            </aside>
-
-            {/* Main Content */}
-            <main className="flex-1 flex flex-col p-6 space-y-6">
-                {/* Header */}
-                <header className="bg-orange-500 text-white text-3xl font-bold p-4 rounded-lg shadow">
-                    Task Manager
-                </header>
-
-                {/* Dashboard Content Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {/* Calendar */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-2">
-                        <Calendar />
-                    </div>
-
-                    {/* Timer */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg">
-                        <Timer />
-                    </div>
-
-                    {/* Stats */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-3">
-                        <StatsComponent />
-                    </div>
-                </div>
-            </main>
-        </div>
-    );
-};
-
-export default Dashboard;
-
-
-
-// import React from "react";
-// import Sidebar from "./Sidebar";
-// import Calendar from "./Calendar";
-// import StatsComponent from "./Stats";
-// import Timer from "./Timer";
+// import React from 'react';
+// import Sidebar from './Sidebar';
+// import Calendar from './Calendar';
+// import StatsComponent from './Stats';
+// import Timer from './Timer';
 
 // const Dashboard: React.FC = () => {
-//   return (
-//     <div className="flex h-screen w-full bg-gray-100">
-//       {/* Sidebar */}
-//       <div className="w-64 bg-white shadow-md p-4 hidden md:block">
-//         <Sidebar />
-//       </div>
-      
-//       {/* Main content */}
-//       <div className="flex flex-col flex-1 p-6 space-y-6 overflow-auto">
-//         <h1 className="text-3xl font-bold text-gray-800 text-center mb-4">
-//           Task Manager
-//         </h1>
-        
-//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-//           {/* Calendar */}
-//           <div className="bg-white shadow-md rounded-lg p-4">
-//             <Calendar />
-//           </div>
-          
-//           {/* Timer */}
-//           <div className="bg-white shadow-md rounded-lg p-4">
-//             <Timer />
-//           </div>
-          
-//           {/* Statistics */}
-//           <div className="bg-white shadow-md rounded-lg p-4">
-//             <StatsComponent />
-//           </div>
+//     return (
+//         <div className="flex h-screen bg-gray-100">
+//             {/* Sidebar */}
+//             <aside className="w-64 bg-white shadow-lg hidden lg:block">
+//                 <Sidebar />
+//             </aside>
+
+//             {/* Main Content */}
+//             <main className="flex-1 flex flex-col p-6 space-y-6">
+//                 {/* Header */}
+//                 <header className="bg-orange-500 text-white text-3xl font-bold p-4 rounded-lg shadow">
+//                     Task Manager
+//                 </header>
+
+//                 {/* Dashboard Content Grid */}
+//                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+//                     {/* Calendar */}
+//                     <div className="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-2">
+//                         <Calendar />
+//                     </div>
+
+//                     {/* Timer */}
+//                     <div className="bg-white p-6 rounded-lg shadow-lg">
+//                         <Timer />
+//                     </div>
+
+//                     {/* Stats */}
+//                     <div className="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-3">
+//                         <StatsComponent />
+//                     </div>
+//                 </div>
+//             </main>
 //         </div>
-//       </div>
-//     </div>
-//   );
+//     );
 // };
 
 // export default Dashboard;
+
+
+
+import React from "react";
+import Sidebar from "./Sidebar";
+import Calendar from "./Calendar";
+import StatsComponent from "./Stats";
+import Timer from "./Timer";
+
+interface DashboardProps {
+  onLogout: () => void;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
+  return (
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar with Logout */}
+      <aside className="w-64 bg-white shadow-lg hidden lg:block">
+        <Sidebar onLogout={onLogout} />
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col p-6 space-y-6">
+        {/* Header */}
+        <header className="bg-orange-500 text-white text-3xl font-bold p-4 rounded-lg shadow flex justify-between items-center">
+          Task Manager
+          <button 
+            onClick={onLogout} 
+            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow transition"
+          >
+            Logout
+          </button>
+        </header>
+
+        {/* Dashboard Content Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-2">
+            <Calendar />
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <Timer />
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-3">
+            <StatsComponent />
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default Dashboard;
