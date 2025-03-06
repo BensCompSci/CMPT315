@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   format,
   startOfMonth,
@@ -18,6 +18,22 @@ const Calendar: React.FC = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [view, setView] = useState("monthly");
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    // Fetch tasks from the database
+    fetchTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    try {
+      const response = await fetch("/api/tasks");
+      const data = await response.json();
+      setTasks(data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
+  };
 
   const renderHeader = () => {
     const dateFormat = "MMMM yyyy";
@@ -92,13 +108,18 @@ const Calendar: React.FC = () => {
 
   const renderDailyCells = () => {
     const formattedDate = format(selectedDate, "d");
+    const dayTasks = tasks.filter((task) =>
+      isSameDay(new Date(task.dueDate), selectedDate)
+    );
     return (
       <div className="body daily-view">
         <div className="row">
           <div className="col cell">
             <span className="number">{formattedDate}</span>
             <div className="task-list">
-              {/* Example tasks, replace with your dynamic tasks */}
+              {dayTasks.map((task) => (
+                <div key={task.id}>{task.title}</div>
+              ))}
             </div>
             <span className="bg">{formattedDate}</span>
           </div>
@@ -117,6 +138,9 @@ const Calendar: React.FC = () => {
     for (let i = 0; i < 7; i++) {
       formattedDate = format(day, "d");
       const cloneDay = day;
+      const dayTasks = tasks.filter((task) =>
+        isSameDay(new Date(task.dueDate), day)
+      );
       days.push(
         <div
           className={`col cell ${
@@ -127,7 +151,9 @@ const Calendar: React.FC = () => {
         >
           <span className="number">{formattedDate}</span>
           <div className="task-list">
-            {/* Example tasks, replace with your dynamic tasks */}
+            {dayTasks.map((task) => (
+              <div key={task.id}>{task.title}</div>
+            ))}
           </div>
           <span className="bg">{formattedDate}</span>
         </div>
@@ -155,6 +181,9 @@ const Calendar: React.FC = () => {
       for (let i = 0; i < 7; i++) {
         formattedDate = format(day, "d");
         const cloneDay = day;
+        const dayTasks = tasks.filter((task) =>
+          isSameDay(new Date(task.dueDate), day)
+        );
         days.push(
           <div
             className={`col cell ${
@@ -169,7 +198,9 @@ const Calendar: React.FC = () => {
           >
             <span className="number">{formattedDate}</span>
             <div className="task-list">
-              {/* Example tasks, replace with your dynamic tasks */}
+              {dayTasks.map((task) => (
+                <div key={task.id}>{task.title}</div>
+              ))}
             </div>
             <span className="bg">{formattedDate}</span>
           </div>
