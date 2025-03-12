@@ -39,35 +39,35 @@ const Calendar: React.FC = () => {
     const dateFormat = "MMMM yyyy";
 
     return (
-      <div className="header row flex-middle">
-        <div className="col col-start">
-          <button className="icon" onClick={prev}>
-            &lt;
-          </button>
-        </div>
-        <div className="col col-center">
+      <div>
+        <div className="date-text">
           <span>{format(currentMonth, dateFormat)}</span>
         </div>
-        <div className="col col-end">
-          <button className="icon" onClick={next}>
-            &gt;
-          </button>
+        <div className="header row flex-middle">
+          <div className="col col-start">
+            <div className="button-group">
+              <button className="icon" onClick={prev}>
+                &lt;
+              </button>
+              <button className="icon" onClick={goToToday}>
+                Today
+              </button>
+            </div>
+          </div>
+          <div className="col col-center"></div>
+          <div className="col col-end">
+            <div className="button-group">
+              <select onChange={(e) => setView(e.target.value)} value={view}>
+                <option value="daily">Day</option>
+                <option value="weekly">Week</option>
+                <option value="monthly">Month</option>
+              </select>
+              <button className="icon" onClick={next}>
+                &gt;
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    );
-  };
-
-  const renderViewToggle = () => {
-    return (
-      <div className="view-toggle">
-        <button className="icon" onClick={goToToday}>
-          Today
-        </button>
-        <select onChange={(e) => setView(e.target.value)} value={view}>
-          <option value="daily">Daily</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
-        </select>
       </div>
     );
   };
@@ -251,7 +251,6 @@ const Calendar: React.FC = () => {
     <div className="calendar-container">
       <div className="calendar">
         {renderHeader()}
-        {renderViewToggle()}
         {renderDays()}
         {renderCells()}
       </div>
