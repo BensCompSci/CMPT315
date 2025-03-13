@@ -32,7 +32,7 @@ function App() {
   return (
     <div>
       {loggedInUser ? (
-        <Dashboard onLogout={() => setLoggedInUser(null)} />
+        <Dashboard user={loggedInUser} onLogout={() => setLoggedInUser(null)} />
       ) : (
         <HomePage updateLoggedInUser={setLoggedInUser} />
       )}

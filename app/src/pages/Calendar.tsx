@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { User } from "../models/User";
 import {
   format,
   startOfMonth,
@@ -13,27 +14,53 @@ import {
   subWeeks,
 } from "date-fns";
 import "./styles/calendar.css";
+import { Task } from "../models/Task";
 
-const Calendar: React.FC = () => {
+interface calendarProps {
+   user: User;
+}
+
+const Calendar: React.FC<calendarProps> = ({ user }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [view, setView] = useState("monthly");
-  const [tasks, setTasks] = useState([]);
+  // interface Task {
+  //   id: string;
+  //   title: string;
+  //   date: string;
+  // }
+  
+  const [tasks, setTasks] = useState<Task[]>([]);
 
+  console.log(user.email);
   useEffect(() => {
-    // Fetch tasks from the database
+    // Fetch the current user from the session or authentication context
+    // fetchCurrentUser();
     fetchTasks();
   }, []);
 
   const fetchTasks = async () => {
+    if (!user) return; // Ensure user is loaded before fetching tasks
     try {
-      const response = await fetch("/api/tasks");
+      const response = await fetch(
+        `http://localhost:8000/task/getAll?owner=${user.email}` , {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            owner: user.email,
+          }),
+        }
+      );
       const data = await response.json();
       setTasks(data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
     }
   };
+
+  console.log(tasks);
 
   const renderHeader = () => {
     const dateFormat = "MMMM yyyy";
@@ -109,7 +136,7 @@ const Calendar: React.FC = () => {
   const renderDailyCells = () => {
     const formattedDate = format(selectedDate, "d");
     const dayTasks = tasks.filter((task) =>
-      isSameDay(new Date(task.dueDate), selectedDate)
+      isSameDay(new Date(task.date), selectedDate)
     );
     return (
       <div className="body daily-view">
@@ -118,7 +145,7 @@ const Calendar: React.FC = () => {
             <span className="number">{formattedDate}</span>
             <div className="task-list">
               {dayTasks.map((task) => (
-                <div key={task.id}>{task.title}</div>
+                <div key={task._id}>{task.title}</div>
               ))}
             </div>
             <span className="bg">{formattedDate}</span>
@@ -139,7 +166,7 @@ const Calendar: React.FC = () => {
       formattedDate = format(day, "d");
       const cloneDay = day;
       const dayTasks = tasks.filter((task) =>
-        isSameDay(new Date(task.dueDate), day)
+        isSameDay(new Date(task.date), day)
       );
       days.push(
         <div
@@ -152,7 +179,7 @@ const Calendar: React.FC = () => {
           <span className="number">{formattedDate}</span>
           <div className="task-list">
             {dayTasks.map((task) => (
-              <div key={task.id}>{task.title}</div>
+              <div key={task._id}>{task.title}</div>
             ))}
           </div>
           <span className="bg">{formattedDate}</span>
@@ -182,7 +209,7 @@ const Calendar: React.FC = () => {
         formattedDate = format(day, "d");
         const cloneDay = day;
         const dayTasks = tasks.filter((task) =>
-          isSameDay(new Date(task.dueDate), day)
+          isSameDay(new Date(task.date), day)
         );
         days.push(
           <div
@@ -199,7 +226,7 @@ const Calendar: React.FC = () => {
             <span className="number">{formattedDate}</span>
             <div className="task-list">
               {dayTasks.map((task) => (
-                <div key={task.id}>{task.title}</div>
+                <div key={task._id}>{task.title}</div>
               ))}
             </div>
             <span className="bg">{formattedDate}</span>
