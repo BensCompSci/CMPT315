@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './styles/index.css';
 import "./styles/timer.css";
+import { User } from "../models/User";
+import { Timer } from "../models/Timer";
 
 const Timer: React.FC = () => {
     const [time, setTime] = useState(1500); // 25 minutes in seconds
