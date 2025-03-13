@@ -11,7 +11,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   border-bottom: 1px solid #ddd;
 }
 
@@ -22,9 +22,9 @@
   margin-top: 10px; /* Add margin to separate from the header */
 }
 
-.view-toggle button,
-.view-toggle select {
-  background: #ff6347;
+.header button,
+.header select {
+  background: #ff7f50;
   color: white;
   font-size: 1.3rem;
   font-weight: bold;
@@ -33,12 +33,14 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s ease;
-  margin: 0 5px; /* Add margin between elements */
+  margin: 0 1px; /* Add margin between elements */
+  width: 125px; /* Set a fixed width */
+  text-align: center; /* Center text */
 }
 
-.view-toggle button:hover,
-.view-toggle select:hover {
-  background: #e5533d;
+.header button:hover,
+.header select:hover {
+  background: #ff4500;
 }
 
 .header .view-toggle {
@@ -53,10 +55,12 @@
 .col {
   flex: 1;
   text-align: center;
-  padding: 10px;
+  padding: 5px;
 }
 
 .col-start {
+  margin: 0px 0;
+  width: 100%;
   text-align: left;
 }
 
@@ -66,6 +70,8 @@
 
 .col-end {
   text-align: right;
+  margin: 0px 0;
+  width: 100%;
 }
 
 .days {
@@ -90,7 +96,7 @@
 }
 
 .cell.selected {
-  background-color: #e5533d;
+  background-color: #ff7f50;
   color: white;
 }
 
@@ -140,4 +146,17 @@
 
 .weekly-view .cell {
   height: 600px; /* Same height as monthly-view cells */
+}
+
+.button-group {
+  display: flex;
+  gap: 1px; /* Adjust gap between buttons as needed */
+}
+
+.date-text {
+  font-size: 2.5rem; /* Match the dashboard header text size */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2px;
+  color: black;
 }
