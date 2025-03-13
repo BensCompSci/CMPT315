@@ -1,6 +1,7 @@
 import Joi, {ObjectSchema} from 'joi';
 import {NextFunction, Response, Request} from 'express';
 import {IUser} from '../models/User';
+import {Task} from '../models/Task';
 
 
 export function ValidateSchema(schema: ObjectSchema){
@@ -27,5 +28,19 @@ export const Schemas = {
             email: Joi.string().regex(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/).required(),
             password: Joi.string().required()
         })  
+    },
+    task:{
+        create: Joi.object<Task>({
+            owner: Joi.string().required(),
+            title: Joi.string().required(),
+            description: Joi.string(),
+            date: Joi.date().required(),
+        }),
+        update: Joi.object<Task>({
+            owner: Joi.string().required(),
+            title: Joi.string().required(),
+            description: Joi.string(),
+            date: Joi.date().required
+        })
     }
 }   
