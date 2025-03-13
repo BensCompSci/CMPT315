@@ -11,7 +11,7 @@ export async function createTask(taskData: Partial<Task>): Promise<Task> {
     return await task.save();
 }
 
-export async function updateTask(id: number, taskData: Partial<Task>): Promise<Task | undefined> {
+export async function updateTask(id: string, taskData: Partial<Task>): Promise<Task | undefined> {
     const task = await TaskDao.findById(id);
     if (!task) {
         return undefined;
@@ -20,6 +20,7 @@ export async function updateTask(id: number, taskData: Partial<Task>): Promise<T
     return await task.save();
 }
 
-export async function deleteTask(id: number): Promise<void> {
-    await TaskDao.findByIdAndDelete(id);
+export async function deleteTask(id: string): Promise<boolean> {
+    const result = await TaskDao.findByIdAndDelete(id);
+    return result !== null;
 }

@@ -1,5 +1,6 @@
 import {Express, Request, Response} from 'express';
 import authRoutes from './AuthRoutes';
+import taskRoutes from './TaskRoutes';
 
 export function registerRoutes(app:Express){
 
@@ -8,5 +9,6 @@ export function registerRoutes(app:Express){
         })
 
     app.use('/auth', authRoutes);
+    app.use('/task', taskRoutes); 
     
 }

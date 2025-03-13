@@ -89,7 +89,7 @@
 // export default Dashboard;
 
 
-
+import { User } from "../models/User";
 import React from "react";
 import Sidebar from "./Sidebar";
 import Calendar from "./Calendar";
@@ -97,10 +97,11 @@ import StatsComponent from "./Stats";
 import Timer from "./Timer";
 
 interface DashboardProps {
+  user: User;
   onLogout: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
+const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar with Logout */}
@@ -124,7 +125,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
         {/* Dashboard Content Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-2">
-            <Calendar />
+            <Calendar user={user} />
           </div>
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <Timer />

@@ -30,6 +30,12 @@ export const Schemas = {
         })  
     },
     task:{
+        getAll: Joi.object().keys({
+            owner: Joi.string().required()
+        }),
+        delete: Joi.object<{id: string}>({
+            id: Joi.string().required()
+        }),
         create: Joi.object<Task>({
             owner: Joi.string().required(),
             title: Joi.string().required(),
@@ -43,4 +49,4 @@ export const Schemas = {
             date: Joi.date().required
         })
     }
-}   
+}
