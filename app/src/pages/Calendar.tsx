@@ -224,11 +224,11 @@ const Calendar: React.FC<calendarProps> = ({ user }) => {
             onClick={() => onDateClick(cloneDay)}
           >
             <span className="number">{formattedDate}</span>
-            <div className="task-list">
+            <span className="task-list">
               {dayTasks.map((task) => (
                 <div key={task._id}>{task.title}</div>
               ))}
-            </div>
+            </span>
             <span className="bg">{formattedDate}</span>
           </div>
         );
