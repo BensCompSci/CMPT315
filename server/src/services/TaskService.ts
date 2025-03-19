@@ -20,7 +20,6 @@ export async function updateTask(id: string, taskData: Partial<Task>): Promise<T
     return await task.save();
 }
 
-export async function deleteTask(id: string): Promise<boolean> {
-    const result = await TaskDao.findByIdAndDelete(id);
-    return result !== null;
-}
+export const deleteTask = async (id: string) => {
+    return await TaskDao.findByIdAndDelete(id); // Ensure this properly deletes the task
+};

@@ -7,11 +7,16 @@ class TaskController {
     // Get all tasks
     public async getAllTasks(req: Request, res: Response): Promise<void> {
         try {
-            const owner = req.body.owner as string;
+            const owner = req.query.owner as string; // Use query parameters instead of req.body
+            if (!owner) {
+                res.status(400).json({ error: 'Owner ID is required' });
+                return;
+            }
+    
             const tasks = await getAllTasks(owner);
             res.status(200).json(tasks);
         } catch (error) {
-            res.status(500).json({ error: 'Internal Server Error' });
+            res.status(500).json({ error: 'Internal Server Error', details: error });
         }
     }
 
@@ -39,16 +44,24 @@ class TaskController {
         }
     }
 
-    // Delete a task
     public async deleteTask(req: Request, res: Response): Promise<void> {
         try {
-            const deletedTask = await deleteTask(req.params.id);
-            if (!deletedTask) {
-                res.status(404).json({ error: 'Task not found' });
+            const { id } = req.body; // Use body instead of params
+            if (!id) {
+                res.status(400).json({ error: "Task ID is required" });
+                return;
             }
-            res.status(200).json({ message: 'Task deleted successfully' });
+    
+            const deletedTask = await deleteTask(id); // Call service function
+            if (!deletedTask) {
+                res.status(404).json({ error: "Task not found" });
+                return;
+            }
+    
+            res.status(200).json({ message: "Task deleted successfully" });
         } catch (error) {
-            res.status(500).json({ error: 'Internal Server Error' });
+            console.error("Error deleting task:", error);
+            res.status(500).json({ error: "Internal Server Error", details: error });
         }
     }
 }

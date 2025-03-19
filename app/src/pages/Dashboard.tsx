@@ -1,117 +1,48 @@
-
-// import React from 'react';
-// import Sidebar from './Sidebar';
-// import HomePage from './HomePage';
-// import Calendar from './Calendar';
-// import StatsComponent from './Stats';
-// import Timer from './Timer';
-// import { User } from '../models/User';
-// import './styles/dashboard.css';
-
-// const Dashboard: React.FC = () => {
-//     const updateLoggedInUser = (user: User) => {
-//         console.log('User logged in:', user);
-//     };
-
-//     const signUpNewUser = (user: User) => {
-//         console.log('New user signed up:', user);
-//     };
-
-//     return (
-//         <div className="dashboard-container">
-//             <div className="dashboard-left">
-//                 <Sidebar />
-//             </div>
-//             <div className="dashboard-right">
-//                 <h1 className="dashboard-header">Task Manager</h1>
-//                 <div className="dashboard-content">
-//                     <div className="dashboard-calendar">
-//                         <Calendar />
-//                     </div>
-//                     <div className="dashboard-timer">
-//                         <Timer />
-//                     </div>
-//                     <div className="dashboard-stats">
-//                         <StatsComponent />
-//                     </div>
-                    
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Dashboard;
-
-// import React from 'react';
-// import Sidebar from './Sidebar';
-// import Calendar from './Calendar';
-// import StatsComponent from './Stats';
-// import Timer from './Timer';
-
-// const Dashboard: React.FC = () => {
-//     return (
-//         <div className="flex h-screen bg-gray-100">
-//             {/* Sidebar */}
-//             <aside className="w-64 bg-white shadow-lg hidden lg:block">
-//                 <Sidebar />
-//             </aside>
-
-//             {/* Main Content */}
-//             <main className="flex-1 flex flex-col p-6 space-y-6">
-//                 {/* Header */}
-//                 <header className="bg-orange-500 text-white text-3xl font-bold p-4 rounded-lg shadow">
-//                     Task Manager
-//                 </header>
-
-//                 {/* Dashboard Content Grid */}
-//                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-//                     {/* Calendar */}
-//                     <div className="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-2">
-//                         <Calendar />
-//                     </div>
-
-//                     {/* Timer */}
-//                     <div className="bg-white p-6 rounded-lg shadow-lg">
-//                         <Timer />
-//                     </div>
-
-//                     {/* Stats */}
-//                     <div className="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-3">
-//                         <StatsComponent />
-//                     </div>
-//                 </div>
-//             </main>
-//         </div>
-//     );
-// };
-
-// export default Dashboard;
-
-
 import { User } from "../models/User";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import Calendar from "./Calendar";
 import StatsComponent from "./Stats";
 import Timer from "./Timer";
+import { Task } from "../models/Task";
 
 interface DashboardProps {
   user: User;
   onLogout: () => void;
 }
 
+const API_URL = "http://localhost:8000/task";
+
 const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchTasks = async () => {
+    if (!user || !user._id) return;
+
+    try {
+      const response = await fetch(`${API_URL}/getAll?owner=${user._id}`);
+      if (!response.ok) throw new Error("Failed to fetch tasks");
+      const data = await response.json();
+      setTasks(data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, [user]);
+
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Sidebar with Logout */}
       <aside className="w-64 bg-white shadow-lg hidden lg:block">
         <Sidebar onLogout={onLogout} />
       </aside>
 
-      {/* Main Content */}
       <main className="flex-1 flex flex-col p-6 space-y-6">
-        {/* Header */}
         <header className="bg-orange-500 text-white text-3xl font-bold p-4 rounded-lg shadow flex justify-between items-center">
           Task Manager
           <button 
@@ -122,16 +53,15 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
           </button>
         </header>
 
-        {/* Dashboard Content Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-2">
-            <Calendar user={user} />
+            <Calendar user={user} tasks={tasks} fetchTasks={fetchTasks} />
           </div>
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <Timer />
           </div>
           <div className="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-3">
-            <StatsComponent />
+            <StatsComponent user={user} tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks} />
           </div>
         </div>
       </main>
@@ -140,3 +70,5 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
 };
 
 export default Dashboard;
+
+
