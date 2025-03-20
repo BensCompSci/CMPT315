@@ -1,6 +1,6 @@
 export interface Timer {
     owner: string;
-    title: string;
+    timerName: string;
     description: string;
     duration: string;
 

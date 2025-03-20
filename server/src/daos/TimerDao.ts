@@ -6,7 +6,7 @@ export interface TimerModel extends Timer, Document {}
 const TimerSchema = new Schema(
     {
         owner: {type: String, required: true},
-        title: {type: String, required: true},
+        timerName: {type: String, required: true},
         description: {type: String, required: false},
         duration: {type: String, required: true},
     },

@@ -59,13 +59,13 @@ export const Schemas = {
         }),
         create: Joi.object<Timer>({
             owner: Joi.string().required(),
-            title: Joi.string().required(),
+            timerName: Joi.string().required(),
             description: Joi.string(),
             duration: Joi.date().required(),
         }),
         update: Joi.object<Timer>({
             owner: Joi.string().required(),
-            title: Joi.string().required(),
+            timerName: Joi.string().required(),
             description: Joi.string(),
             duration: Joi.date().required
         })

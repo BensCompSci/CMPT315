@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import './styles/index.css';
 import "./styles/timer.css";
 import { User } from "../models/User";
-import { Timer } from "../models/Timer";
+//import { Timer } from "../models/Timer";
+import { Task } from "../models/Task";
 
 const Timer: React.FC = () => {
     const [time, setTime] = useState(1500); // 25 minutes in seconds
@@ -100,7 +101,7 @@ const Timer: React.FC = () => {
 
     return (
         <div className="container">
-            <header>
+            <header style={{ fontSize: '1.5rem', padding: '0.5rem' }}>
                 <h1>Pomodoro Timer</h1>
             </header>
             {selectedItem ? (
