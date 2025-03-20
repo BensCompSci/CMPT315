@@ -6,6 +6,16 @@ body {
     background-color: #f4f4f4;
 }
 
+aside {
+    transition: width 0.3s ease;
+    height: auto;
+    margin-top: 0; /* Match the height of the header */
+}
+
+.blur-background {
+    filter: blur(5px);
+}
+
 .dashboard-container {
     display: flex;
     flex-direction: row;
