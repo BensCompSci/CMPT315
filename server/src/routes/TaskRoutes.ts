@@ -8,7 +8,8 @@ import {Schemas, ValidateSchema} from '../middlewares/Validation';
 
 const router = express.Router();
 
-router.post("/getAll", ValidateSchema(Schemas.task.getAll), TaskController.getAllTasks);
+router.get("/getAll", TaskController.getAllTasks); 
+// router.post("/getAll", ValidateSchema(Schemas.task.getAll), TaskController.getAllTasks);
 router.post("/create", ValidateSchema(Schemas.task.create), TaskController.createTask);
 router.post("/update", ValidateSchema(Schemas.task.update), TaskController.updateTask);
 router.post("/delete", ValidateSchema(Schemas.task.delete), TaskController.deleteTask);
