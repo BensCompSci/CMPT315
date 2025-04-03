@@ -1,185 +1,132 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './styles/index.css';
-import "./styles/timer.css";
-import { User } from "../models/User";
-//import { Timer } from "../models/Timer";
-import { Task } from "../models/Task";
+import React, { useState, useEffect } from 'react';
+import './styles/Timer.css';
 
 const Timer: React.FC = () => {
-    const [time, setTime] = useState(1500); // 25 minutes in seconds
-    const [isActive, setIsActive] = useState(false);
-    const [isPaused, setIsPaused] = useState(false);
-    const [shortBreak, setShortBreak] = useState(300); // 5 minutes in seconds
-    const [workTime, setWorkTime] = useState(1500); // 25 minutes in seconds
-    const [longBreak, setLongBreak] = useState(900); // 15 minutes in seconds
-    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const [time, setTime] = useState(25 * 60);
+    const [isRunning, setIsRunning] = useState(false);
+    const [isBreakMode, setIsBreakMode] = useState(false);
+    const [cycles, setCycles] = useState(0);
 
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [timers, setTimers] = useState([
-        { id: 1, title: "Timer 1", details: "Details of timer 1", duration: "25:00" },
-        { id: 2, title: "Timer 2", details: "Details of timer 2", duration: "15:00" },
-    ]);
-    const [showTimerForm, setShowTimerForm] = useState(false);
-    const [newTimer, setNewTimer] = useState({ title: "", details: "", duration: "" });
-    const [error, setError] = useState("");
+    const [workDuration, setWorkDuration] = useState(25);
+    const [breakDuration, setBreakDuration] = useState(5);
+    const [totalCycles, setTotalCycles] = useState(4);
 
-    const [tasks, setTasks] = useState([
-        { id: 1, name: "Study for CMPT 315" },
-        { id: 2, name: "Create Database" },
-        { id: 3, name: "Build Lego Set" },
-    ]);
-    const [selectedTask, setSelectedTask] = useState(tasks[0].id);
-
-    useEffect(() => {
-        if (isActive && !isPaused) {
-            intervalRef.current = setInterval(() => {
-                setTime((prevTime) => prevTime - 1);
-            }, 1000);
-        } else if (isPaused) {
-            clearInterval(intervalRef.current!);
-        }
-
-        if (time === 0) {
-            clearInterval(intervalRef.current!);
-            setIsActive(false);
-        }
-
-        return () => clearInterval(intervalRef.current!);
-    }, [isActive, isPaused, time]);
-
-    useEffect(() => {
-        if (!isActive) {
-            setTime(workTime);
-        }
-    }, [workTime]);
-
-    const handleStart = () => {
-        setIsActive(true);
-        setIsPaused(false);
-    };
-
-    const handlePause = () => {
-        setIsPaused(!isPaused);
-    };
-
-    const handleReset = () => {
-        clearInterval(intervalRef.current!);
-        setIsActive(false);
-        setIsPaused(false);
-        setTime(workTime);
-    };
-
-    const handleSaveTimer = () => {
-        if (!newTimer.title.trim()) {
-            setError("Timer Name cannot be empty");
-            return;
-        }
-        if (newTimer.title.length > 20) {
-            setError("Timer Name cannot exceed 20 characters");
-            return;
-        }
-        if (!newTimer.details.trim()) {
-            setError("Timer Description cannot be empty");
-            return;
-        }
-
-        setTimers([...timers, { id: timers.length + 1, ...newTimer }]);
-        setNewTimer({ title: "", details: "", duration: "" });
-        setShowTimerForm(false);
-        setError("");
-    };
-
+    // Format time as mm:ss
     const formatTime = (seconds: number) => {
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = seconds % 60;
-        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     };
 
-    const handleCompleteTask = () => {
-        setTasks(tasks.filter(task => task.id !== selectedTask));
+    // Start or pause the timer
+    const handleStartPause = () => {
+        setIsRunning(!isRunning);
     };
+
+    // Reset timer to default state
+    const handleReset = () => {
+        setIsRunning(false);
+        setIsBreakMode(false);
+        setCycles(0);
+        setTime(workDuration * 60);
+    };
+
+    // Countdown logic
+    useEffect(() => {
+        let interval: NodeJS.Timeout;
+
+        if (isRunning) {
+            interval = setInterval(() => {
+                setTime(prevTime => {
+                    if (prevTime === 0) {
+                        if (!isBreakMode) {
+                            // Start break
+                            setIsBreakMode(true);
+                            return breakDuration * 60;
+                        } else {
+                            // End break and continue to next cycle
+                            const nextCycle = cycles + 1;
+                            if (nextCycle >= totalCycles) {
+                                handleReset();
+                                return 0;
+                            } else {
+                                setCycles(nextCycle);
+                                setIsBreakMode(false);
+                                return workDuration * 60;
+                            }
+                        }
+                    }
+                    return prevTime - 1;
+                });
+            }, 1000);
+        }
+
+        return () => clearInterval(interval);
+    }, [isRunning, isBreakMode, cycles, workDuration, breakDuration, totalCycles]);
+
+    // Reset timer duration if workDuration changes while paused
+    useEffect(() => {
+        if (!isRunning) {
+            setTime(workDuration * 60);
+        }
+    }, [workDuration]);
 
     return (
-        <div className="container dashboard-timer">
-            <header style={{ fontSize: '1.5rem', padding: '0.5rem' }}>
-                <h1>Pomodoro Timer</h1>
-            </header>
-            {selectedItem ? (
-                <div className="timer-popup">
-                    <h2>{selectedItem.title}</h2>
-                    <p>{selectedItem.details}</p>
-                    {selectedItem.duration && <p><strong>Duration:</strong> {selectedItem.duration}</p>}
-                    <button onClick={() => setSelectedItem(null)}>Back</button>
-                </div>
-            ) : showTimerForm ? (
-                <div className="new-timer-popup">
-                    <h2>New Timer</h2>
-                    {error && <p className="error-message">{error}</p>}
+        <div className="timer-container">
+            <h2 className="timer-title">Pomodoro Timer</h2>
+
+            <div
+                className={`timer-display ${
+                    isRunning
+                        ? isBreakMode
+                            ? "break-mode"
+                            : "work-mode"
+                        : "reset-mode"
+                }`}
+            >
+                {formatTime(time)}
+            </div>
+
+            <div className="timer-controls">
+                <button className="timer-btn" onClick={handleStartPause}>
+                    {isRunning ? 'Pause' : 'Start'}
+                </button>
+                <button className="timer-btn" onClick={handleReset}>Reset</button>
+            </div>
+
+            <div className="timer-settings">
+                <div className="setting-group">
+                    <label>Work</label>
                     <input
-                        type="text"
-                        placeholder="Timer Name"
-                        value={newTimer.title}
-                        maxLength={20}
-                        onChange={(e) => setNewTimer({ ...newTimer, title: e.target.value })}
+                        type="number"
+                        value={workDuration}
+                        onChange={(e) => setWorkDuration(Number(e.target.value))}
+                        min={1}
                     />
-                    <textarea
-                        placeholder="Timer Description"
-                        value={newTimer.details}
-                        onChange={(e) => setNewTimer({ ...newTimer, details: e.target.value })}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Duration (e.g., 25:00)"
-                        value={newTimer.duration}
-                        onChange={(e) => setNewTimer({ ...newTimer, duration: e.target.value })}
-                    />
-                    <button onClick={handleSaveTimer}>Save</button>
-                    <button onClick={() => setShowTimerForm(false)}>Back</button>
                 </div>
-            ) : (
-                <>
-                    <div className="timer-container">
-                        <div className={`timer-bar ${isActive ? 'active' : ''} ${isPaused ? 'paused' : ''}`}>
-                            <span>{formatTime(time)}</span>
-                        </div>
-                    </div>
-                    <div className="timer-buttons">
-                        <button onClick={handleStart}>Start</button>
-                        <button onClick={handlePause}>{isPaused ? 'Resume' : 'Pause'}</button>
-                        <button onClick={handleReset}>Reset</button>
-                    </div>
-                    <div className="timer-settings">
-                        <label>Short Break: <input type="text" className="w-20 border-2 text-center rounded-lg p-1.5" placeholder="5 min" value={shortBreak / 60}
-                                            onChange={(e) => setShortBreak(Number(e.target.value) * 60)} /></label>
-                        <label>Work Time: <input type="text" className="w-20 border-2 text-center rounded-lg p-1.5" placeholder="25 min" value={workTime / 60}
-                                            onChange={(e) => setWorkTime(Number(e.target.value) * 60)} /></label>
-                        <label>Long Break: <input type="text" className="w-20 border-2 text-center rounded-lg p-1.5" placeholder="15 min" value={longBreak / 60}
-                                            onChange={(e) => setLongBreak(Number(e.target.value) * 60)} /></label>
-                    </div>
-                    <div className="task-container">
-                        <label>Task chosen:</label>
-                        <select value={selectedTask} onChange={(e) => setSelectedTask(Number(e.target.value))}>
-                            {tasks.map((task) => (
-                                <option key={task.id} value={task.id}>{task.name}</option>
-                            ))}
-                        </select>
-                        <button onClick={handleCompleteTask} style={{ marginLeft: '10px' }}>Complete Task</button>
-                    </div>
-                    <div className="content">
-                        <section className="timers expanded" style={{ height: "450px" }}>
-                            <h2>Timers</h2>
-                            <ul className="scrollable-list">
-                                {timers.map((timer) => (
-                                    <li key={timer.id} onClick={() => setSelectedItem(timer)}>
-                                        {timer.title}
-                                    </li>
-                                ))}
-                            </ul>
-                            <button onClick={() => setShowTimerForm(true)}>New Timer</button>
-                        </section>
-                    </div>
-                </>
-            )}
+                <div className="setting-group">
+                    <label>Break</label>
+                    <input
+                        type="number"
+                        value={breakDuration}
+                        onChange={(e) => setBreakDuration(Number(e.target.value))}
+                        min={1}
+                    />
+                </div>
+                <div className="setting-group">
+                    <label>Cycles</label>
+                    <input
+                        type="number"
+                        value={totalCycles}
+                        onChange={(e) => setTotalCycles(Number(e.target.value))}
+                        min={1}
+                    />
+                </div>
+            </div>
+
+            <div className="cycle-info">
+                <p>Cycle: {cycles} / {totalCycles}</p>
+            </div>
         </div>
     );
 };

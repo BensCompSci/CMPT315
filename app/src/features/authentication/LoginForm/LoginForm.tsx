@@ -46,11 +46,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ updateLoggedInUser, switch
             {error && <p className="text-sm text-red-500 font-medium">Username or password incorrect</p>}
             <input id="email" type="email" placeholder="Email" required ref={emailRef} className="border p-2 rounded w-full mb-2" />
             <input id="password" type="password" placeholder="Password" required ref={passwordRef} className="border p-2 rounded w-full mb-2" />
-            <button type="submit" onClick={handleLoginUser} className="bg-blue-500 text-white px-4 py-2 rounded mt-3 hover:bg-blue-600 w-full">
+            <button type="submit" onClick={handleLoginUser} className="bg-orange-500 text-white px-4 py-2 rounded mt-3 hover:bg-orange-600 w-full">
                 Login
             </button>
             <p className="mt-4 text-sm">
-                Don’t have an account? <button onClick={switchToSignUp} className="text-blue-500">Create one!</button>
+                Don’t have an account? <button onClick={switchToSignUp} className="text-orange-500">Create one!</button>
             </p>
         </div>
     );

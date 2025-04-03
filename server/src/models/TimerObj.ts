@@ -1,7 +1,7 @@
-export type Timer = {
-    _id: string;
+export interface TimerObj {
     owner: string;
     timerName: string;
     description: string;
     duration: string;
-};
+
+}

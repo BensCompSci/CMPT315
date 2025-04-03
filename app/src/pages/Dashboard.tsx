@@ -18,7 +18,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
   const [loading, setLoading] = useState(true);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [isMouseInsideSidebar, setIsMouseInsideSidebar] = useState(false);
-  const [isStatsPopupVisible, setIsStatsPopupVisible] = useState(false);
+
 
   const fetchTasks = async () => {
     if (!user || !user._id) return;
@@ -57,12 +57,12 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
   }, [isMouseInsideSidebar]);
 
   return (
-      // Full viewport container with no overflow
       <div className="flex flex-col h-screen w-screen bg-gray-100 overflow-hidden">
-        {/* Fixed header */}
+        {/* Header */}
         <header className="flex-none h-16 bg-orange-500 text-white flex items-center px-4 shadow text-3xl font-bold">
           Task Manager
         </header>
+
         {/* Main content area */}
         <div className="flex flex-1 overflow-hidden relative">
           {/* Sidebar */}
@@ -77,36 +77,38 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
               }`}
           >
             {isSidebarVisible && (
-                <Sidebar onLogout={onLogout} onShowStats={() => setIsStatsPopupVisible(true)} />
+                <Sidebar onLogout={onLogout} onShowStats={() => {}} />
             )}
           </aside>
-          {/* Main layout: Calendar and Timer side-by-side */}
+
+          {/* Calendar + Timer layout */}
           <main className="flex flex-1 overflow-hidden">
             <div className="flex flex-row h-full w-full">
+              {/* Calendar Section */}
               <div className="flex-grow bg-white h-full">
                 <div className="h-full w-full">
                   <Calendar user={user} tasks={tasks} fetchTasks={fetchTasks} />
                 </div>
               </div>
-              <div className="w-[25%] bg-white h-full">
-                <div className="h-full w-full">
-                  <Timer />
+
+              {/* Timer and Stats stacked */}
+              <div className="w-[25%] bg-white h-full overflow-y-auto">
+                <div className="h-full w-full flex flex-col items-center p-4">
+                  <Timer user={user} tasks={tasks} fetchTasks={fetchTasks} />
+
+                  <div className="w-full mt-4">
+                    <StatsComponent
+                        user={user}
+                        tasks={tasks}
+                        setTasks={setTasks}
+                        fetchTasks={fetchTasks}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </main>
         </div>
-        {/* Stats popup */}
-        {isStatsPopupVisible && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-white p-4 rounded-lg shadow-lg">
-                <button onClick={() => setIsStatsPopupVisible(false)} className="text-red-500">
-                  Close
-                </button>
-                <StatsComponent user={user} tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks} />
-              </div>
-            </div>
-        )}
       </div>
   );
 };

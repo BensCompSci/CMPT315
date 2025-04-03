@@ -118,12 +118,12 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ switchToLogin }) => {
       <button
         type="submit"
         onClick={handleRegisterUser}
-        className="bg-blue-500 text-white px-4 py-2 rounded mt-3 hover:bg-blue-600 w-full"
+        className="bg-orange-500 text-white px-4 py-2 rounded mt-3 hover:bg-orange-600 w-full"
       >
         Sign Up
       </button>
       <p className="mt-4 text-sm">
-        Already have an account? <button onClick={switchToLogin} className="text-blue-500">Log in here</button>
+        Already have an account? <button onClick={switchToLogin} className="text-orange-500">Log in here</button>
       </p>
 
       {/* Success Modal */}
