@@ -57,48 +57,57 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
   }, [isMouseInsideSidebar]);
 
   return (
-    <div className="flex flex-col h-screen w-screen bg-gray-100">
-      <header className="bg-orange-500 text-white text-3xl font-bold p-4 shadow flex justify-between items-center">
-        Task Manager
-      </header>
-
-      <div className="flex flex-1 w-full h-full">
-        <aside
-          onMouseEnter={() => setIsMouseInsideSidebar(true)}
-          onMouseLeave={() => {
-            setIsMouseInsideSidebar(false);
-            setIsSidebarVisible(false);
-          }}
-          className={`bg-white shadow-lg fixed left-0 top-0 h-full transition-transform duration-500 ease-in-out ${
-            isSidebarVisible ? "translate-x-0 w-64" : "-translate-x-full w-0"
-          }`}
-        >
-          {isSidebarVisible && (
-            <Sidebar onLogout={onLogout} onShowStats={() => setIsStatsPopupVisible(true)} />
-          )}
-        </aside>
-
-        <main className="flex-1 flex flex-col h-full w-full ml-0">
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-0 h-full">
-            <div className="col-span-3 bg-white h-full w-full p-2">
-              <Calendar user={user} tasks={tasks} fetchTasks={fetchTasks} />
+      // Full viewport container with no overflow
+      <div className="flex flex-col h-screen w-screen bg-gray-100 overflow-hidden">
+        {/* Fixed header */}
+        <header className="flex-none h-16 bg-orange-500 text-white flex items-center px-4 shadow text-3xl font-bold">
+          Task Manager
+        </header>
+        {/* Main content area */}
+        <div className="flex flex-1 overflow-hidden relative">
+          {/* Sidebar */}
+          <aside
+              onMouseEnter={() => setIsMouseInsideSidebar(true)}
+              onMouseLeave={() => {
+                setIsMouseInsideSidebar(false);
+                setIsSidebarVisible(false);
+              }}
+              className={`bg-white shadow-lg fixed left-0 top-0 h-full transition-transform duration-500 ease-in-out ${
+                  isSidebarVisible ? "translate-x-0 w-64" : "-translate-x-full w-0"
+              }`}
+          >
+            {isSidebarVisible && (
+                <Sidebar onLogout={onLogout} onShowStats={() => setIsStatsPopupVisible(true)} />
+            )}
+          </aside>
+          {/* Main layout: Calendar and Timer side-by-side */}
+          <main className="flex flex-1 overflow-hidden">
+            <div className="flex flex-row h-full w-full">
+              <div className="flex-grow bg-white h-full">
+                <div className="h-full w-full">
+                  <Calendar user={user} tasks={tasks} fetchTasks={fetchTasks} />
+                </div>
+              </div>
+              <div className="w-[25%] bg-white h-full">
+                <div className="h-full w-full">
+                  <Timer />
+                </div>
+              </div>
             </div>
-            <div className="col-span-1 bg-white h-full w-full p-2">
-              <Timer />
-            </div>
-          </div>
-        </main>
-      </div>
-
-      {isStatsPopupVisible && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-4 rounded-lg shadow-lg">
-            <button onClick={() => setIsStatsPopupVisible(false)} className="text-red-500">Close</button>
-            <StatsComponent user={user} tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks} />
-          </div>
+          </main>
         </div>
-      )}
-    </div>
+        {/* Stats popup */}
+        {isStatsPopupVisible && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="bg-white p-4 rounded-lg shadow-lg">
+                <button onClick={() => setIsStatsPopupVisible(false)} className="text-red-500">
+                  Close
+                </button>
+                <StatsComponent user={user} tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks} />
+              </div>
+            </div>
+        )}
+      </div>
   );
 };
 
