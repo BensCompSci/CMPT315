@@ -10,6 +10,7 @@ import {
   addMonths,
   addWeeks,
   subWeeks,
+  parseISO,
 } from "date-fns";
 import "./styles/calendar.css";
 import { Task } from "../models/Task";
@@ -37,8 +38,12 @@ const Calendar: React.FC<CalendarProps> = ({ user, tasks, fetchTasks }) => {
       <div className="header row flex-middle">
         <div className="col col-start">
           <div className="button-group">
-            <button className="icon" onClick={prev}>&lt;</button>
-            <button className="icon" onClick={goToToday}>Today</button>
+            <button className="icon" onClick={prev}>
+              &lt;
+            </button>
+            <button className="icon" onClick={goToToday}>
+              Today
+            </button>
           </div>
         </div>
         <div className="col col-center"></div>
@@ -49,7 +54,9 @@ const Calendar: React.FC<CalendarProps> = ({ user, tasks, fetchTasks }) => {
               <option value="weekly">Week</option>
               <option value="monthly">Month</option>
             </select>
-            <button className="icon" onClick={next}>&gt;</button>
+            <button className="icon" onClick={next}>
+              &gt;
+            </button>
           </div>
         </div>
       </div>
@@ -63,7 +70,9 @@ const Calendar: React.FC<CalendarProps> = ({ user, tasks, fetchTasks }) => {
   };
 
   const renderDailyCells = () => {
-    const dayTasks = tasks.filter((task) => isSameDay(new Date(task.date), selectedDate));
+    const dayTasks = tasks.filter((task) =>
+      isSameDay(parseISO(task.date), selectedDate)
+    );
     return (
       <div className="body daily-view">
         <div className="row">
@@ -86,10 +95,14 @@ const Calendar: React.FC<CalendarProps> = ({ user, tasks, fetchTasks }) => {
 
     for (let i = 0; i < 7; i++) {
       const day = addDays(startDate, i);
-      const dayTasks = tasks.filter((task) => isSameDay(new Date(task.date), day));
+      const dayTasks = tasks.filter((task) =>
+        isSameDay(parseISO(task.date), day)
+      );
       days.push(
         <div
-          className={`col cell ${isSameDay(day, selectedDate) ? "selected" : ""}`}
+          className={`col cell ${
+            isSameDay(day, selectedDate) ? "selected" : ""
+          }`}
           key={day.toString()}
           onClick={() => onDateClick(day)}
         >
@@ -103,7 +116,11 @@ const Calendar: React.FC<CalendarProps> = ({ user, tasks, fetchTasks }) => {
       );
     }
 
-    return <div className="body weekly-view"><div className="row">{days}</div></div>;
+    return (
+      <div className="body weekly-view">
+        <div className="row">{days}</div>
+      </div>
+    );
   };
 
   const renderMonthlyCells = () => {
@@ -116,10 +133,18 @@ const Calendar: React.FC<CalendarProps> = ({ user, tasks, fetchTasks }) => {
     for (let week = 0; week < 6; week++) {
       for (let i = 0; i < 7; i++) {
         const cloneDay = day;
-        const dayTasks = tasks.filter((task) => isSameDay(new Date(task.date), day));
+        const dayTasks = tasks.filter((task) =>
+          isSameDay(parseISO(task.date), day)
+        );
         days.push(
           <div
-            className={`col cell ${!isSameMonth(day, monthStart) ? "disabled" : isSameDay(day, selectedDate) ? "selected" : ""}`}
+            className={`col cell ${
+              !isSameMonth(day, monthStart)
+                ? "disabled"
+                : isSameDay(day, selectedDate)
+                ? "selected"
+                : ""
+            }`}
             key={day.toString()}
             onClick={() => onDateClick(cloneDay)}
           >
@@ -133,7 +158,11 @@ const Calendar: React.FC<CalendarProps> = ({ user, tasks, fetchTasks }) => {
         );
         day = addDays(day, 1);
       }
-      rows.push(<div className="row" key={day.toString()}>{days}</div>);
+      rows.push(
+        <div className="row" key={day.toString()}>
+          {days}
+        </div>
+      );
       days = [];
     }
     return <div className="body monthly-view">{rows}</div>;
@@ -142,13 +171,21 @@ const Calendar: React.FC<CalendarProps> = ({ user, tasks, fetchTasks }) => {
   const onDateClick = (day: Date) => setSelectedDate(day);
 
   const next = () => {
-    setCurrentMonth(view === "monthly" ? addMonths(currentMonth, 1) : selectedDate);
-    setSelectedDate(view === "weekly" ? addWeeks(selectedDate, 1) : addDays(selectedDate, 1));
+    setCurrentMonth(
+      view === "monthly" ? addMonths(currentMonth, 1) : selectedDate
+    );
+    setSelectedDate(
+      view === "weekly" ? addWeeks(selectedDate, 1) : addDays(selectedDate, 1)
+    );
   };
 
   const prev = () => {
-    setCurrentMonth(view === "monthly" ? addMonths(currentMonth, -1) : selectedDate);
-    setSelectedDate(view === "weekly" ? subWeeks(selectedDate, 1) : addDays(selectedDate, -1));
+    setCurrentMonth(
+      view === "monthly" ? addMonths(currentMonth, -1) : selectedDate
+    );
+    setSelectedDate(
+      view === "weekly" ? subWeeks(selectedDate, 1) : addDays(selectedDate, -1)
+    );
   };
 
   const goToToday = () => {
