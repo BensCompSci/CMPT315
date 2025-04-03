@@ -100,7 +100,7 @@ const Timer: React.FC = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container dashboard-timer">
             <header style={{ fontSize: '1.5rem', padding: '0.5rem' }}>
                 <h1>Pomodoro Timer</h1>
             </header>

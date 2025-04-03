@@ -1,101 +1,94 @@
-/* General Page Styles */
-body {
-    margin: 0;
-    padding: 0;
+.dashboard-timer {
+    height: 100% !important;
+    max-width: none !important;
+    margin-top: 0 !important;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Main container */
+.container {
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
-}
-
-/* Main Container */
-.container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    box-sizing: border-box;
-    display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    margin-top: 20px;
+    background-color: white;
+    box-sizing: border-box;
 }
 
-/* Title Styling */
-h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.content {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-/* Timer Container */
 .timer-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
     width: 100%;
-    max-width: 600px;
-    height: auto; /* Change height to auto */
-    box-sizing: border-box;
+    height: auto;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-}
-
-.timer-popup, .new-timer-popup {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px; 
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.new-timer-popup input,
-.new-timer-popup textarea {
-    width: 100%; 
-    margin-bottom: 10px; 
-    padding: 10px; 
-    border: 1px solid #ddd; 
-    border-radius: 5px; 
-    box-sizing: border-box; 
+.timer-bar {
+    flex: 0 0 auto;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    background-color: transparent;
+    padding: 1rem 1.5rem;
+    height: 4.5rem;
+    border: 2px solid #333;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 0.75rem auto;
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.error-message {
-    color: red;
+
+.timer-bar.active {
+    background-color: #4caf50;
 }
 
-.expanded {
+.timer-bar.paused {
+    background-color: #f44336;
+}
+
+.timer-buttons,
+.timer-settings,
+.task-container {
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.task-container {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.timers {
+    display: flex;
+    flex-direction: column;
     flex: 1;
-    margin: 10px;
+    max-height: 200px; /* You can adjust this based on available space */
+    overflow: hidden;
+    margin-top: 10px;
 }
 
 .scrollable-list {
     list-style: none;
-    padding: 0;
     margin: 0;
     overflow-y: auto;
-    max-height: 300px;
+    max-height: 150px; /* Height of scrollable area */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .scrollable-list li {
@@ -112,48 +105,53 @@ button {
     margin-top: 10px;
     padding: 10px 20px;
     border: none;
-    background-color: #ff7f50; 
+    background-color: #ff7f50;
     color: white;
     border-radius: 5px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #ff4500; 
+    background-color: #ff4500;
 }
 
-.timer-buttons, .timer-settings, .task-container {
-    margin: 10px 0;
+/* Form styling */
+.new-timer-popup input,
+.new-timer-popup textarea {
     width: 100%;
-}
-
-.task-container {
-    margin: 10px 0;
-    width: 100%;
-    padding: 10px; 
-    border: 1px solid #ddd; 
-    border-radius: 5px; 
-    background-color: #f9f9f9; 
-}
-
-/* Timer Bar Styling */
-.timer-bar {
-    background-color: #e0e0e0;
-    padding: 60px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    text-align: center;
-    width: 100%;
     box-sizing: border-box;
-    font-size: 4em;
-    min-height: 100px;
-    margin: 0; /* Remove all margins */
 }
 
-.timer-bar.active {
-    background-color: #4caf50; /* Green background when active */
+.timer-popup,
+.new-timer-popup {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.timer-bar.paused {
-    background-color: #f44336; /* Red background when paused */
+.content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
+.expanded {
+    flex: 1;
+    margin: 10px 0;
+}
+
+.error-message {
+    color: red;
+}

@@ -39,9 +39,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onLogout, onShowStats }) => {
           >
             Tasks
           </button>
-          <button className="w-full text-left px-4 py-3 text-lg font-semibold text-gray-700 bg-gray-100 rounded-lg hover:bg-orange-500 hover:text-white transition">
-            Settings
-          </button>
+          {/*<button className="w-full text-left px-4 py-3 text-lg font-semibold text-gray-700 bg-gray-100 rounded-lg hover:bg-orange-500 hover:text-white transition">*/}
+          {/*  Settings*/}
+          {/*</button>*/}
           <button
               className="w-full text-left px-4 py-3 text-lg font-semibold text-red-600 bg-gray-100 rounded-lg hover:bg-red-500 hover:text-white transition"
               onClick={onLogout}
