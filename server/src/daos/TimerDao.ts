@@ -1,7 +1,7 @@
 import mongoose, {Schema, Document} from 'mongoose';
-import {Timer} from '../models/Timer';
+import {TimerObj} from '../models/TimerObj';
 
-export interface TimerModel extends Timer, Document {}
+export interface TimerModel extends TimerObj, Document {}
 
 const TimerSchema = new Schema(
     {

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Timer } from '../models/Timer';
+import { TimerObj } from '../models/TimerObj';
 import { createTimer, deleteTimer, getAllTimers, updateTimer } from '../services/TimerService';
 import { get } from 'http';
 

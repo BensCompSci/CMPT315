@@ -2,7 +2,7 @@ import Joi, {ObjectSchema} from 'joi';
 import {NextFunction, Response, Request} from 'express';
 import {IUser} from '../models/User';
 import {Task} from '../models/Task';
-import {Timer} from "../models/Timer";
+import {TimerObj} from "../models/TimerObj";
 
 
 export function ValidateSchema(schema: ObjectSchema){
@@ -57,13 +57,13 @@ export const Schemas = {
         delete: Joi.object<{id: string}>({
             id: Joi.string().required()
         }),
-        create: Joi.object<Timer>({
+        create: Joi.object<TimerObj>({
             owner: Joi.string().required(),
             timerName: Joi.string().required(),
             description: Joi.string(),
             duration: Joi.date().required(),
         }),
-        update: Joi.object<Timer>({
+        update: Joi.object<TimerObj>({
             owner: Joi.string().required(),
             timerName: Joi.string().required(),
             description: Joi.string(),
