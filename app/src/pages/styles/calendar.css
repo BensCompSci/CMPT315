@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 800px; /* Increased max-width */
+  max-width: 100%; /* Use full width */
+  height: 100%; /* Full height */
   margin: 0 auto;
 }
 
@@ -18,8 +19,7 @@
 .view-toggle {
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
-  margin-top: 10px; /* Add margin to separate from the header */
+  margin: 10px 0;
 }
 
 .header button,
@@ -33,9 +33,9 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s ease;
-  margin: 0 1px; /* Add margin between elements */
-  width: 125px; /* Set a fixed width */
-  text-align: center; /* Center text */
+  margin: 0 1px;
+  width: 125px;
+  text-align: center;
 }
 
 .header button:hover,
@@ -50,6 +50,7 @@
 .row {
   display: flex;
   justify-content: space-between;
+  gap: 5px; /* Added gap for spacing */
 }
 
 .col {
@@ -58,19 +59,7 @@
   padding: 5px;
 }
 
-.col-start {
-  margin: 0px 0;
-  width: 100%;
-  text-align: left;
-}
-
-.col-center {
-  text-align: center;
-}
-
-.col-end {
-  text-align: right;
-  margin: 0px 0;
+.col-start, .col-end, .col-center {
   width: 100%;
 }
 
@@ -83,11 +72,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between; /* Adjusted to space-between for tasks */
-  padding: 20px; /* Increased padding */
+  justify-content: space-between;
+  padding: 20px;
+  margin: 2px;
   border: 1px solid #ddd;
   cursor: pointer;
-  height: 100px; /* Increased height */
+  height: 150px; /* Increased height for better visibility */
+  background-color: #fff;
 }
 
 .cell.disabled {
@@ -101,8 +92,8 @@
 }
 
 .number {
-  font-size: 16px;
-  padding-bottom: 2px;
+  font-size: 20px;
+  padding-bottom: 5px;
 }
 
 .bg {
@@ -123,42 +114,37 @@
 }
 
 .task-list {
-  /* margin-top: 1px; */
-  font-size: 8px;
-  /* width: 100%;
-  text-align: left;
-  padding-left: 1px; Adjust padding as needed */
+  font-size: 10px;
+  margin-top: 5px;
 }
 
 .calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   width: 100%;
-  max-width: 800px; /* Same max-width as the calendar */
+  height: 100%;
   background: white;
-  padding: 50px;
+  padding: 20px;
   border-radius: 15px;
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
-  margin: 10px auto;
 }
 
-.daily-view .cell {
-  height: 600px; /* Adjust height for daily view */
-  background-color: white; /* Ensure background is white */
-}
-
+.daily-view .cell,
 .weekly-view .cell {
-  height: 600px; /* Same height as monthly-view cells */
+  height: 200px; /* Adjust height for daily and weekly views */
 }
 
 .button-group {
   display: flex;
-  gap: 1px; /* Adjust gap between buttons as needed */
+  gap: 5px;
 }
 
 .date-text {
-  font-size: 2.5rem; /* Match the dashboard header text size */
+  font-size: 2.5rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 2px;
+  margin-bottom: 10px;
   color: black;
 }
