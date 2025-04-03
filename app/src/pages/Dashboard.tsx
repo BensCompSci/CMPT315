@@ -16,7 +16,8 @@ const API_URL = "http://localhost:8000/task";
 const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [isMouseInsideSidebar, setIsMouseInsideSidebar] = useState(false);
   const [isStatsPopupVisible, setIsStatsPopupVisible] = useState(false);
 
   const fetchTasks = async () => {
@@ -38,49 +39,67 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
     fetchTasks();
   }, [user]);
 
+  // Handle mouse hover to show/hide sidebar
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Check if mouse is near the left edge or inside the sidebar
+      if (e.clientX <= 10) {
+        setIsSidebarVisible(true);
+      } else if (!isMouseInsideSidebar) {
+        setIsSidebarVisible(false);
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [isMouseInsideSidebar]);
+
   return (
-      <div className="flex flex-col h-screen bg-gray-100">
-        <header className="bg-orange-500 text-white text-3xl font-bold p-4 rounded-lg shadow flex justify-between items-center">
-          Task Manager
-          <button
-              onClick={() => setIsSidebarVisible(!isSidebarVisible)}
-              className="bg-gray-300 hover:bg-gray-400 text-black px-2 py-1 rounded-lg shadow transition self-start"
-          >
-            {isSidebarVisible ? 'Hide Sidebar' : 'Show Sidebar'}
-          </button>
-        </header>
+    <div className="flex flex-col h-screen w-screen bg-gray-100">
+      <header className="bg-orange-500 text-white text-3xl font-bold p-4 shadow flex justify-between items-center">
+        Task Manager
+      </header>
 
-        <div className="flex flex-1">
-          <aside className={`bg-white shadow-lg transition-width duration-300 ${isSidebarVisible ? 'w-64' : 'w-0'}`}>
-            {isSidebarVisible && (
-                <Sidebar onLogout={onLogout} onShowStats={() => setIsStatsPopupVisible(true)} />
-            )}
-          </aside>
+      <div className="flex flex-1 w-full h-full">
+        <aside
+          onMouseEnter={() => setIsMouseInsideSidebar(true)}
+          onMouseLeave={() => {
+            setIsMouseInsideSidebar(false);
+            setIsSidebarVisible(false);
+          }}
+          className={`bg-white shadow-lg fixed left-0 top-0 h-full transition-transform duration-500 ease-in-out ${
+            isSidebarVisible ? "translate-x-0 w-64" : "-translate-x-full w-0"
+          }`}
+        >
+          {isSidebarVisible && (
+            <Sidebar onLogout={onLogout} onShowStats={() => setIsStatsPopupVisible(true)} />
+          )}
+        </aside>
 
-          <main className="flex-1 flex flex-col space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-white p-4 rounded-lg shadow-lg col-span-1 lg:col-span-2">
-                <Calendar user={user} tasks={tasks} fetchTasks={fetchTasks} />
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow-lg">
-                <Timer />
-              </div>
+        <main className="flex-1 flex flex-col h-full w-full ml-0">
+          <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-0 h-full">
+            <div className="col-span-3 bg-white h-full w-full p-2">
+              <Calendar user={user} tasks={tasks} fetchTasks={fetchTasks} />
             </div>
-          </main>
-        </div>
-
-        {isStatsPopupVisible && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-white p-4 rounded-lg shadow-lg">
-                <button onClick={() => setIsStatsPopupVisible(false)} className="text-red-500">Close</button>
-                <StatsComponent user={user} tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks} />
-              </div>
+            <div className="col-span-1 bg-white h-full w-full p-2">
+              <Timer />
             </div>
-        )}
+          </div>
+        </main>
       </div>
+
+      {isStatsPopupVisible && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg shadow-lg">
+            <button onClick={() => setIsStatsPopupVisible(false)} className="text-red-500">Close</button>
+            <StatsComponent user={user} tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks} />
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
 export default Dashboard;
-
-
