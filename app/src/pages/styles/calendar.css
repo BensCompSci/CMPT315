@@ -43,8 +43,12 @@
   cursor: pointer;
   transition: background 0.3s ease;
   margin: 0 1px;
-  width: 125px;
+  width: 125px; /* Ensure consistent width */
+  height: 48px; /* Set consistent height */
   text-align: center;
+  box-sizing: border-box; 
+  vertical-align: middle; /* Align elements vertically */
+  line-height: 24px; /* Center text vertically */
 }
 
 .header button:hover,
